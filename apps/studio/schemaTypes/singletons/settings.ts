@@ -1,4 +1,4 @@
-import {CogIcon, ControlsIcon, ErrorOutlineIcon, MenuIcon, SearchIcon} from '@sanity/icons'
+import {CogIcon, ControlsIcon, EarthGlobeIcon, SearchIcon} from '@sanity/icons'
 import {defineType, defineField} from 'sanity'
 
 const TITLE = 'Settings'
@@ -10,20 +10,19 @@ export const settings = defineType({
   icon: CogIcon,
   groups: [
     {
-      default: true,
-      name: 'navigation',
-      title: 'Navigation',
-      icon: MenuIcon,
+      name: 'filters',
+      title: 'Filters',
+      icon: SearchIcon,
+    },
+    {
+      name: 'contactUs',
+      title: 'Contact Us',
+      icon: EarthGlobeIcon,
     },
     {
       name: 'productSettings',
-      title: 'Product options',
+      title: 'Product Settings',
       icon: ControlsIcon,
-    },
-    {
-      name: 'notFoundPage',
-      title: '404 page',
-      icon: ErrorOutlineIcon,
     },
     {
       name: 'seo',
@@ -35,6 +34,7 @@ export const settings = defineType({
     defineField({
       name: 'currency',
       title: 'Currency',
+      description: 'Store currency (e.g., DZD, EUR).',
       group: 'productSettings',
       type: 'reference',
       to: [{type: 'currency'}],
@@ -42,8 +42,16 @@ export const settings = defineType({
     defineField({
       name: 'filters',
       title: 'Filters',
-      group: 'productSettings',
+      description:
+        'Tags used for filtering products on the website (e.g., “blue”, “textured”, “outdoor”). These should reflect key product traits customers might search or filter by.',
+      group: 'filters',
       type: 'filters',
+    }),
+    defineField({
+      name: 'contactUS',
+      title: 'Contact Us',
+      group: 'contactUs',
+      type: 'contactUs',
     }),
   ],
   preview: {

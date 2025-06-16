@@ -25,6 +25,7 @@ import {filtersType} from './objects/filtersType'
 import {materialType} from './documents/materialType'
 import {sizeType} from './documents/sizeType'
 import {colorType} from './documents/colorType'
+import {contactUsType} from './objects/contactUsType'
 
 // Objects used as annotations must be imported first
 const annotations = [linkEmailType, linkExternalType, linkInternalType, linkProductType]
@@ -39,6 +40,7 @@ const objects = [
   collectionLinksType,
   productDetailsType,
   filtersType,
+  contactUsType,
 ]
 
 const singletons = [settings, home]
