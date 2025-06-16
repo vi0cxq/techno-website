@@ -16,10 +16,12 @@
   ],
   "dependencies": {
     "@sanity/vision": "^3.92.0",
+    "jotai": "^2.12.5",
     "react": "^19.1",
     "react-dom": "^19.1",
     "sanity": "^3.92.0",
-    "styled-components": "^6.1.18"
+    "styled-components": "^6.1.18",
+    "zustand": "^5.0.5"
   },
   "devDependencies": {
     "@sanity/eslint-config-studio": "^5.0.2",
