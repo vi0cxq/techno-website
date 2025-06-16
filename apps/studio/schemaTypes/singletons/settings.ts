@@ -2,11 +2,8 @@ import {CogIcon, ControlsIcon, ErrorOutlineIcon, MenuIcon, SearchIcon} from '@sa
 import {defineType, defineField} from 'sanity'
 
 const TITLE = 'Settings'
-interface ProductOptions {
-  title: string
-}
 
-const settings = defineType({
+export const settings = defineType({
   name: 'settings',
   title: TITLE,
   type: 'document',
@@ -19,7 +16,7 @@ const settings = defineType({
       icon: MenuIcon,
     },
     {
-      name: 'productOptions',
+      name: 'productSettings',
       title: 'Product options',
       icon: ControlsIcon,
     },
@@ -38,15 +35,15 @@ const settings = defineType({
     defineField({
       name: 'currency',
       title: 'Currency',
-      group: 'productOptions',
+      group: 'productSettings',
       type: 'reference',
       to: [{type: 'currency'}],
     }),
     defineField({
-      name: 'seo',
-      title: 'SEO',
-      type: 'seo',
-      group: 'seo',
+      name: 'filters',
+      title: 'Filters',
+      group: 'productSettings',
+      type: 'filters',
     }),
   ],
   preview: {
@@ -57,5 +54,3 @@ const settings = defineType({
     },
   },
 })
-
-export default settings

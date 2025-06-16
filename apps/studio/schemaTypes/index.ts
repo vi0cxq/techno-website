@@ -1,6 +1,6 @@
-import collectionType from './documents/collectionType'
-import productType from './documents/productType'
-import categoryType from './documents/categoryType'
+import {collectionType} from './documents/collectionType'
+import {productType} from './documents/productType'
+import {categoryType} from './documents/categoryType'
 
 import {collectionGroupType} from './objects/collection/collectionGroupType'
 import {collectionLinksType} from './objects/collection/collectionLinksType'
@@ -17,10 +17,14 @@ import {linkProductType} from './objects/link/linkProductType'
 
 import {seoType} from './objects/seoType'
 
-import home from './singletons/home'
-import settings from './singletons/settings'
+import {home} from './singletons/home'
+import {settings} from './singletons/settings'
 import {currencyType} from './documents/currencyType'
 import {productDetailsType} from './objects/product/productDetailsType'
+import {filtersType} from './objects/filtersType'
+import {materialType} from './documents/materialType'
+import {sizeType} from './documents/sizeType'
+import {colorType} from './documents/colorType'
 
 // Objects used as annotations must be imported first
 const annotations = [linkEmailType, linkExternalType, linkInternalType, linkProductType]
@@ -34,10 +38,19 @@ const objects = [
   collectionGroupType,
   collectionLinksType,
   productDetailsType,
+  filtersType,
 ]
 
 const singletons = [settings, home]
 
-const documents = [collectionType, productType, categoryType, currencyType]
+const documents = [
+  collectionType,
+  productType,
+  categoryType,
+  currencyType,
+  materialType,
+  sizeType,
+  colorType,
+]
 
 export const schemaTypes = [...annotations, ...objects, ...singletons, ...documents]

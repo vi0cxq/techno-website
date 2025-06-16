@@ -1,6 +1,6 @@
 import {defineField, defineType} from 'sanity'
 
-const collectionType = defineType({
+export const collectionType = defineType({
   name: 'collection',
   title: 'Collections',
   type: 'document',
@@ -38,4 +38,3 @@ const collectionType = defineType({
     }),
   ],
 })
-export default collectionType

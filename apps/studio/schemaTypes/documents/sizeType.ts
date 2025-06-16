@@ -1,8 +1,8 @@
 import {defineField, defineType} from 'sanity'
 
-const productOptionsType = defineType({
-  name: 'productOptions',
-  title: 'Product Options',
+export const sizeType = defineType({
+  name: 'size',
+  title: 'Sizes',
   type: 'document',
   fields: [
     defineField({
@@ -17,11 +17,12 @@ const productOptionsType = defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
-      name: 'values',
-      title: 'Values',
-      type: 'array',
-      of: [{type: 'string'}],
+      name: 'image',
+      title: 'Cover Image',
+      type: 'image',
+      options: {
+        hotspot: true,
+      },
     }),
   ],
 })
-export default productOptionsType

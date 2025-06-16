@@ -23,6 +23,9 @@ const hiddenDocTypes = (listItem: ListItemBuilder) => {
     'settings',
     'category',
     'currency',
+    'material',
+    'size',
+    'color',
   ].includes(id)
 }
 

@@ -7,9 +7,17 @@ export const productDetailsType = defineField({
   fields: [
     defineField({
       name: 'material',
-      type: 'string',
       title: 'Material',
       description: 'The primary material the tile is made from (e.g., ceramic, porcelain).',
+      type: 'reference',
+      to: [{type: 'material'}],
+    }),
+    defineField({
+      name: 'size',
+      title: 'Size',
+      description: 'The primary material the tile is made from (e.g., ceramic, porcelain).',
+      type: 'reference',
+      to: [{type: 'size'}],
     }),
     defineField({
       name: 'dimensions',
@@ -43,9 +51,10 @@ export const productDetailsType = defineField({
     }),
     defineField({
       name: 'color',
-      type: 'string',
       title: 'Color',
       description: 'The color or shade of the tile.',
+      type: 'reference',
+      to: [{type: 'color'}],
     }),
     defineField({
       name: 'finish',

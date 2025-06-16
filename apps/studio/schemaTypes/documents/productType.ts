@@ -2,7 +2,7 @@ import {defineType, defineField, defineArrayMember} from 'sanity'
 import {BasketIcon, ControlsIcon, TagIcon} from '@sanity/icons'
 import {GenerateVariants} from './GenerateVariants'
 
-const productType = defineType({
+export const productType = defineType({
   name: 'product',
   title: 'Products',
   type: 'document',
@@ -269,5 +269,3 @@ const productType = defineType({
     }),
   ],
 })
-
-export default productType

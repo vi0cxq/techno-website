@@ -3,7 +3,7 @@ import {defineField} from 'sanity'
 
 const TITLE = 'Home'
 
-const home = defineField({
+export const home = defineField({
   name: 'home',
   title: TITLE,
   type: 'document',
@@ -26,4 +26,3 @@ const home = defineField({
     },
   },
 })
-export default home
