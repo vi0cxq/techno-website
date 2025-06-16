@@ -26,6 +26,7 @@ import {materialType} from './documents/materialType'
 import {sizeType} from './documents/sizeType'
 import {colorType} from './documents/colorType'
 import {contactUsType} from './objects/contactUsType'
+import {faqType} from './documents/faqType'
 
 // Objects used as annotations must be imported first
 const annotations = [linkEmailType, linkExternalType, linkInternalType, linkProductType]
@@ -53,6 +54,7 @@ const documents = [
   materialType,
   sizeType,
   colorType,
+  faqType,
 ]
 
 export const schemaTypes = [...annotations, ...objects, ...singletons, ...documents]

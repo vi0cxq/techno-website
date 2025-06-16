@@ -46,7 +46,8 @@ export const productType = defineType({
       name: 'description',
       title: 'Description',
       group: 'product',
-      type: 'text',
+      type: 'array',
+      of: [{type: 'block'}],
     }),
     defineField({
       name: 'category',

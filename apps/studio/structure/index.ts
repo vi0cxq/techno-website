@@ -4,6 +4,7 @@ import products from './productStructure'
 import home from './homeStructure'
 import settings from './settingStructure'
 import category from './categoryStructure'
+import faq from './faqStructure'
 
 const hiddenDocTypes = (listItem: ListItemBuilder) => {
   const id = listItem.getId()
@@ -26,6 +27,7 @@ const hiddenDocTypes = (listItem: ListItemBuilder) => {
     'material',
     'size',
     'color',
+    'faq',
   ].includes(id)
 }
 
@@ -34,9 +36,10 @@ export const structure: StructureResolver = (S, context) =>
     .title('Content')
     .items([
       home(S, context),
+      faq(S, context),
       S.divider(),
-      collections(S, context),
       products(S, context),
+      collections(S, context),
       category(S, context),
       S.divider(),
       settings(S, context),
