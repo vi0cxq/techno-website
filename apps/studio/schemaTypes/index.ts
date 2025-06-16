@@ -27,6 +27,8 @@ import {sizeType} from './documents/sizeType'
 import {colorType} from './documents/colorType'
 import {contactUsType} from './objects/contactUsType'
 import {faqType} from './documents/faqType'
+import {privacyPolicy} from './singletons/privacyPolicy'
+import {termsOfService} from './singletons/termsService'
 
 // Objects used as annotations must be imported first
 const annotations = [linkEmailType, linkExternalType, linkInternalType, linkProductType]
@@ -44,7 +46,7 @@ const objects = [
   contactUsType,
 ]
 
-const singletons = [settings, home]
+const singletons = [settings, home, privacyPolicy, termsOfService]
 
 const documents = [
   collectionType,

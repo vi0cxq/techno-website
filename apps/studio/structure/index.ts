@@ -5,6 +5,8 @@ import home from './homeStructure'
 import settings from './settingStructure'
 import category from './categoryStructure'
 import faq from './faqStructure'
+import terms from './termsServiceStructure'
+import privacy from './privacyPolicyStructure'
 
 const hiddenDocTypes = (listItem: ListItemBuilder) => {
   const id = listItem.getId()
@@ -28,21 +30,24 @@ const hiddenDocTypes = (listItem: ListItemBuilder) => {
     'size',
     'color',
     'faq',
+    'privacyPolicy',
+    'termsOfService',
   ].includes(id)
 }
 
 export const structure: StructureResolver = (S, context) =>
   S.list()
-    .title('Content')
+    .title('Pages')
     .items([
       home(S, context),
       faq(S, context),
+      terms(S, context),
+      privacy(S, context),
       S.divider(),
       products(S, context),
       collections(S, context),
       category(S, context),
       S.divider(),
       settings(S, context),
-      // S.divider(),
       ...S.documentTypeListItems().filter(hiddenDocTypes),
     ])
