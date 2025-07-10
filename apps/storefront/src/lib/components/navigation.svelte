@@ -257,7 +257,7 @@
 						</Accordion.Trigger>
 						<Accordion.Content class="grid grid-cols-1 gap-3 py-3 sm:grid-cols-2">
 							{#each navigation_data as tile (tile.id)}
-								<a href="/" class="text-muted text-lg">
+								<a href={`/collections/${tile.name}`} class="text-muted text-lg">
 									{tile.name}
 								</a>
 							{/each}
@@ -317,7 +317,7 @@
 		class="grid grid-cols-4 gap-8 px-[var(--container-padding)] py-[calc(var(--container-padding)+3.5rem)]"
 	>
 		{#each navigation_data as tile (tile.id)}
-			<a href="/" class="navigation_card invisible translate-y-4">
+			<a href={`/collections/${tile.name}`} class="navigation_card invisible translate-y-4">
 				<div class="flex flex-col gap-1">
 					<div class="relative aspect-[4/2.3] flex-1 overflow-hidden">
 						<img

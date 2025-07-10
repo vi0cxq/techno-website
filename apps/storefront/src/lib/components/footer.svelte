@@ -9,7 +9,7 @@
 		class="relative flex flex-1 flex-col px-[var(--container-padding)] py-8 md:p-[var(--container-padding)]"
 	>
 		<div
-			class="mb-[var(--container-padding)] flex flex-1 flex-col justify-between gap-[var(--container-padding)] sm:flex-row"
+			class="mb-8 flex flex-1 flex-col justify-between gap-8 sm:flex-row md:mb-[var(--container-padding)] md:gap-[var(--container-padding)]"
 		>
 			<div class="flex gap-10 sm:gap-15 md:flex-1">
 				<div>
@@ -84,7 +84,7 @@
 			<img src={titleImg} alt="" srcset="" class="w-full object-cover object-center" />
 		</div>
 	</div>
-	<div class="h-[50vh] w-full">
+	<div class="h-[45vh] w-full">
 		<div class="relative size-full">
 			<img
 				src={footerImg}
