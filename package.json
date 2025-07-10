@@ -4,5 +4,8 @@
   "type": "module",
   "workspaces": [
     "apps/*"
-  ]
+  ],
+  "dependencies": {
+    "gsap": "^3.13.0"
+  }
 }

@@ -1,0 +1,340 @@
+<script lang="ts">
+	import type { Attachment } from 'svelte/attachments';
+	import { getContext } from 'svelte';
+
+	import { gsap } from 'gsap';
+	import { ScrollTrigger } from 'gsap/ScrollTrigger';
+	import type Lenis from 'lenis';
+
+	import { tiles } from '$lib/data';
+	import * as Accordion from '$lib/components/ui/accordion/index.js';
+
+	import footerImg from '$lib/assets/images/footer.webp';
+	import logo from '$lib/assets/svg/techno-ceram-logo.svg';
+
+	const lenis = getContext<Lenis>('lenis');
+
+	let navigation_data = tiles.slice(0, 8);
+
+	function createCollectionAnimation() {
+		let animation: GSAPTimeline;
+
+		return {
+			to(): Attachment {
+				return (element) => {
+					const md = gsap.matchMedia();
+
+					md.add('(min-width: 1024px)', () => {
+						animation = gsap
+							.timeline({ paused: true })
+							.to('.collection_menu', {
+								height: 'auto',
+								duration: 0.8,
+								ease: 'power4.out'
+							})
+							.to(
+								element,
+								{
+									autoAlpha: 1,
+									duration: 0.4,
+									ease: 'power4.out'
+								},
+								'-=0.58'
+							)
+							.to(
+								'.navigation_card',
+								{
+									autoAlpha: 1,
+									duration: 0.4,
+									stagger: 0.05,
+									y: 0
+								},
+								'-=0.7'
+							);
+					});
+				};
+			},
+			play() {
+				animation.play();
+				lenis.stop();
+			},
+			reverse() {
+				animation.reverse();
+				lenis.start();
+			},
+			invalidate() {
+				animation?.invalidate();
+			}
+		};
+	}
+
+	function createMenuAnimation() {
+		let animation: GSAPTimeline;
+
+		return {
+			to(): Attachment {
+				return (element) => {
+					const md = gsap.matchMedia();
+
+					md.add('(max-width: 1024px)', () => {
+						animation = gsap
+							.timeline({ paused: true })
+							.to(element, {
+								width: '100%',
+								duration: 0.8,
+								ease: 'power4.out'
+							})
+							.to(
+								'.menu_link',
+								{
+									autoAlpha: 1,
+									duration: 0.4,
+									stagger: 0.05,
+									y: 0
+								},
+								'-=0.7'
+							)
+							.reverse();
+					});
+				};
+			},
+
+			toggle() {
+				if (animation.reversed()) {
+					animation.play();
+					lenis.stop();
+				} else {
+					animation.reverse();
+					lenis.start();
+				}
+			}
+		};
+	}
+
+	function createNavAnimation() {
+		return {
+			to(): Attachment {
+				return (element) => {
+					const showNav = gsap
+						.from(element, {
+							yPercent: -100,
+							paused: true,
+							duration: 0.2
+						})
+						.progress(1);
+
+					ScrollTrigger.create({
+						start: 'top top',
+						end: 'max',
+						onUpdate: (self) => {
+							// eslint-disable-next-line @typescript-eslint/no-unused-expressions
+							self.direction === -1 ? showNav.play() : showNav.reverse();
+						}
+					});
+				};
+			}
+		};
+	}
+
+	const collectionAnimation = createCollectionAnimation();
+	const menuAnimation = createMenuAnimation();
+	const navAnimation = createNavAnimation();
+</script>
+
+<nav
+	class="bg-background text-foreground fixed z-[100] flex h-12 w-full items-center justify-between px-[var(--container-padding)] lg:h-11"
+	{@attach navAnimation.to()}
+>
+	<img src={logo} alt="techno ceram" class="size-6" />
+	<ul class="hidden items-center gap-3 text-xs font-medium uppercase lg:flex">
+		<li
+			onmouseenter={() => collectionAnimation.play()}
+			onmouseleave={() => collectionAnimation.reverse()}
+		>
+			<p class="group relative cursor-pointer overflow-hidden tracking-wider">
+				<span
+					class="block transition-transform duration-[0.6s] ease-[cubic-bezier(.16,1,.3,1)] will-change-transform group-hover:-translate-y-full"
+				>
+					collections
+				</span>
+				<span
+					class="absolute top-0 left-0 w-full translate-y-full transition-transform duration-[0.6s] ease-[cubic-bezier(.16,1,.3,1)] will-change-transform group-hover:translate-y-0"
+				>
+					collections
+				</span>
+			</p>
+		</li>
+		<li>
+			<a href="/" class="group relative block cursor-pointer overflow-hidden tracking-wider">
+				<span
+					class="block transition-transform duration-[0.6s] ease-[cubic-bezier(.16,1,.3,1)] will-change-transform group-hover:-translate-y-full"
+				>
+					showrooms
+				</span>
+				<span
+					class="absolute top-0 left-0 w-full translate-y-full transition-transform duration-[0.6s] ease-[cubic-bezier(.16,1,.3,1)] will-change-transform group-hover:translate-y-0"
+				>
+					showrooms
+				</span>
+			</a>
+		</li>
+		<li>
+			<a href="/" class="group relative block cursor-pointer overflow-hidden tracking-wider">
+				<span
+					class="block transition-transform duration-[0.6s] ease-[cubic-bezier(.16,1,.3,1)] will-change-transform group-hover:-translate-y-full"
+				>
+					the story
+				</span>
+				<span
+					class="absolute top-0 left-0 w-full translate-y-full transition-transform duration-[0.6s] ease-[cubic-bezier(.16,1,.3,1)] will-change-transform group-hover:translate-y-0"
+				>
+					the story
+				</span>
+			</a>
+		</li>
+		<li>
+			<a href="/" class="group relative block cursor-pointer overflow-hidden tracking-wider">
+				<span
+					class="block transition-transform duration-[0.6s] ease-[cubic-bezier(.16,1,.3,1)] will-change-transform group-hover:-translate-y-full"
+				>
+					journal
+				</span>
+				<span
+					class="absolute top-0 left-0 w-full translate-y-full transition-transform duration-[0.6s] ease-[cubic-bezier(.16,1,.3,1)] will-change-transform group-hover:translate-y-0"
+				>
+					journal
+				</span>
+			</a>
+		</li>
+		<li>
+			<a href="/" class="group relative block cursor-pointer overflow-hidden tracking-wider">
+				<span
+					class="block transition-transform duration-[0.6s] ease-[cubic-bezier(.16,1,.3,1)] will-change-transform group-hover:-translate-y-full"
+				>
+					contact
+				</span>
+				<span
+					class="absolute top-0 left-0 w-full translate-y-full transition-transform duration-[0.6s] ease-[cubic-bezier(.16,1,.3,1)] will-change-transform group-hover:translate-y-0"
+				>
+					contact
+				</span>
+			</a>
+		</li>
+	</ul>
+	<button
+		class="font-ivy bg-background-3 text-foreground-2 cursor-pointer rounded-full px-3 py-1 text-base lg:hidden"
+		onclick={() => {
+			menuAnimation.toggle();
+		}}
+	>
+		Menu
+	</button>
+</nav>
+
+<div
+	class="bg-background-3 text-foreground-2 fixed top-0 left-0 z-50 min-h-screen w-0 overflow-hidden lg:hidden"
+	{@attach menuAnimation.to()}
+>
+	<div
+		class="flex flex-col px-[var(--container-padding)] py-[calc(var(--container-padding)+3.5rem)]"
+	>
+		<ul>
+			<li class="menu_link invisible">
+				<a
+					href="/"
+					class="border-foreground-2/20 inline-block w-full border-b py-5 text-xl leading-[1.2cap] uppercase"
+				>
+					Home
+				</a>
+			</li>
+			<li class="menu_link invisible">
+				<Accordion.Root type="single">
+					<Accordion.Item value="item-1">
+						<Accordion.Trigger
+							class="border-foreground-2/20 cursor-pointer items-center rounded-none border-b py-5 text-xl leading-[1.2cap] uppercase"
+						>
+							collections
+						</Accordion.Trigger>
+						<Accordion.Content class="grid grid-cols-1 gap-3 py-3 sm:grid-cols-2">
+							{#each navigation_data as tile (tile.id)}
+								<a href="/" class="text-muted text-lg">
+									{tile.name}
+								</a>
+							{/each}
+						</Accordion.Content>
+					</Accordion.Item>
+				</Accordion.Root>
+			</li>
+			<li class="menu_link invisible">
+				<a
+					href="/"
+					class="border-foreground-2/20 inline-block w-full border-b py-5 text-xl leading-[1.2cap] uppercase"
+				>
+					showrooms
+				</a>
+			</li>
+			<li class="menu_link invisible">
+				<a
+					href="/"
+					class="border-foreground-2/20 inline-block w-full border-b py-5 text-xl leading-[1.2cap] uppercase"
+				>
+					journal
+				</a>
+			</li>
+			<li class="menu_link invisible">
+				<a
+					href="/"
+					class="border-foreground-2/20 inline-block w-full border-b py-5 text-xl leading-[1.2cap] uppercase"
+				>
+					the story
+				</a>
+			</li>
+			<li class="menu_link invisible">
+				<a
+					href="/"
+					class="border-foreground-2/20 inline-block w-full border-b py-5 text-xl leading-[1.2cap] uppercase"
+				>
+					contact
+				</a>
+			</li>
+		</ul>
+	</div>
+</div>
+
+<div
+	{@attach collectionAnimation.to()}
+	class="bg-background-3/70 invisible fixed top-0 left-0 z-40 h-screen w-full"
+	id="overlay"
+></div>
+<!-- svelte-ignore a11y_no_static_element_interactions -->
+<div
+	onmouseleave={() => collectionAnimation.reverse()}
+	onmouseenter={() => collectionAnimation.play()}
+	class="bg-background collection_menu fixed top-0 left-0 z-50 h-0 w-full overflow-hidden"
+	id="collection_menu"
+>
+	<div
+		class="grid grid-cols-4 gap-8 px-[var(--container-padding)] py-[calc(var(--container-padding)+3.5rem)]"
+	>
+		{#each navigation_data as tile (tile.id)}
+			<a href="/" class="navigation_card invisible translate-y-4">
+				<div class="flex flex-col gap-1">
+					<div class="relative aspect-[4/2.3] flex-1 overflow-hidden">
+						<img
+							src={footerImg}
+							alt=""
+							srcset=""
+							class="absolute top-0 left-0 size-full object-cover"
+						/>
+					</div>
+					<p class="text-sm font-medium underline">{tile.name}</p>
+				</div>
+			</a>
+		{/each}
+	</div>
+</div>
+<svelte:window
+	onresize={() => {
+		collectionAnimation.invalidate();
+	}}
+/>

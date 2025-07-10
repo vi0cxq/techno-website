@@ -7,26 +7,48 @@
 :root {
 	--radius: 0.625rem;
 	--background: oklch(1 0 0);
-	--foreground: oklch(0.129 0.042 264.695);
-	--card: oklch(1 0 0);
-	--card-foreground: oklch(0.129 0.042 264.695);
+	--background-2: oklch(0.9666 0.0276 76.21);
+	--background-3: oklch(0.2191 0.0058 285.91);
+
+	--foreground: oklch(0.2191 0.0058 285.91);
+	--foreground-2: oklch(1 0 0);
+	--muted: oklch(85.221% 0.00108 12.242);
+
+	/* --card: oklch(1 0 0);
+	--card-foreground: oklch(0.2191 0.0058 285.91);
 	--popover: oklch(1 0 0);
-	--popover-foreground: oklch(0.129 0.042 264.695);
+	--popover-foreground: oklch(0.2191 0.0058 285.91);
 	--primary: oklch(0.208 0.042 265.755);
 	--primary-foreground: oklch(0.984 0.003 247.858);
 	--secondary: oklch(0.968 0.007 247.896);
 	--secondary-foreground: oklch(0.208 0.042 265.755);
-	--muted: oklch(0.968 0.007 247.896);
 	--muted-foreground: oklch(0.554 0.046 257.417);
 	--accent: oklch(0.968 0.007 247.896);
 	--accent-foreground: oklch(0.208 0.042 265.755);
 	--destructive: oklch(0.577 0.245 27.325);
 	--border: oklch(0.929 0.013 255.508);
 	--input: oklch(0.929 0.013 255.508);
-	--ring: oklch(0.704 0.04 256.788);
+	--ring: oklch(0.704 0.04 256.788); */
+
+	/* Fonts */
+
+	/* @link https://utopia.fyi/type/calculator?c=320,14,1.2,1920,14,1.125,5,2,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l&g=s,l,xl,12 */
+	--text-xs: clamp(0.6076rem, 0.5909rem + 0.0837vw, 0.6914rem);
+	--text-sm: clamp(0.7292rem, 0.7194rem + 0.0486vw, 0.7778rem);
+	--text-base: clamp(0.875rem, 0.875rem + 0vw, 0.875rem); /* 14-14 */
+	--text-lg: clamp(1.0625rem, 1.025rem + 0.1875vw, 1.25rem); /* 17-20 */
+	--text-xl: clamp(1.375rem, 1.15rem + 1.125vw, 2.5rem); /* 22-40 */
+	--text-2xl: clamp(2rem, 1.6rem + 2vw, 4rem); /* 32-64 */
+	--text-5xl: clamp(2.25rem, 1.575rem + 3.375vw, 5.625rem); /* 36-90 */
 
 	--font-ivy: 'IvyPresto Display';
 	--font-suisse: 'Suisse Intl', 'sans-serif';
+
+	/* Spacing */
+
+	--container-padding: clamp(0.5rem, 0.1625rem + 1.6875vw, 2.1875rem); /* 8-35 */
+	--section-padding: clamp(5rem, 4.55rem + 2.25vw, 7.25rem); /* 90-116 */
+	--gap: clamp(0.5rem, 0.35rem + 0.75vw, 1.25rem);
 }
 
 @theme inline {
@@ -35,7 +57,10 @@
 	--radius-lg: var(--radius);
 	--radius-xl: calc(var(--radius) + 4px);
 	--color-background: var(--background);
+	--color-background-2: var(--background-2);
+	--color-background-3: var(--background-3);
 	--color-foreground: var(--foreground);
+	--color-foreground-2: var(--foreground-2);
 	--color-card: var(--card);
 	--color-card-foreground: var(--card-foreground);
 	--color-popover: var(--popover);
@@ -53,19 +78,20 @@
 	--color-input: var(--input);
 	--color-ring: var(--ring);
 
-	/* @link https://utopia.fyi/type/calculator?c=320,14,1.2,1920,14,1.125,5,2,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l&g=s,l,xl,12 */
-
-	--text-step--2: clamp(0.6076rem, 0.5909rem + 0.0837vw, 0.6914rem);
-	--text-step--1: clamp(0.7292rem, 0.7194rem + 0.0486vw, 0.7778rem);
-	--text-step-0: clamp(0.875rem, 0.875rem + 0vw, 0.875rem);
-	--text-step-1: clamp(0.9844rem, 1.0631rem + -0.0656vw, 1.05rem);
-	--text-step-2: clamp(1.1074rem, 1.2905rem + -0.1526vw, 1.26rem);
-	--text-step-3: clamp(1.2458rem, 1.5652rem + -0.2662vw, 1.512rem);
-	--text-step-4: clamp(1.4016rem, 1.897rem + -0.4128vw, 1.8144rem);
-	--text-step-5: clamp(1.5768rem, 2.2974rem + -0.6005vw, 2.1773rem);
+	--text-s1: clamp(2.125rem, 1.425rem + 3.5vw, 5.625rem);
 
 	--font-ivy: var(--font-ivy);
 	--font-suisse: var(--font-suisse);
+
+	--text-xs: var(--text-xs);
+	--text-sm: var(--text-sm);
+	--text-base: var(--text-base); /* 14-14 */
+	--text-lg: var(--text-lg); /* 17-20 */
+	--text-xl: var(--text-xl); /* 22-40 */
+	--text-2xl: var(--text-2xl); /* 32-64 */
+	--text-5xl: var(--text-5xl); /* 36-90 */
+
+	--breakpoint-md: 50rem;
 }
 
 @layer base {
