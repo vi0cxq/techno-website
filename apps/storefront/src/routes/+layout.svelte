@@ -32,7 +32,7 @@
 </script>
 
 <Navigation />
-<main class="bg-background relative z-10 mb-[100vh] flex min-h-screen flex-col overflow-x-hidden">
+<main class="bg-background relative z-10 mb-[100vh] flex min-h-screen flex-col">
 	{@render children()}
 </main>
 <Footer />

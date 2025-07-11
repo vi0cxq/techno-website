@@ -11,8 +11,17 @@
 
 	import footerImg from '$lib/assets/images/footer.webp';
 	import logo from '$lib/assets/svg/techno-ceram-logo.svg';
+	import { page } from '$app/state';
+	import { beforeNavigate } from '$app/navigation';
 
 	const lenis = getContext<Lenis>('lenis');
+
+	const transparentNavRoutes = ['/products/', '/collections/'];
+
+	let scrolled = $state(false);
+	let isProductPage = $derived(
+		transparentNavRoutes.some((route) => page.url.pathname.startsWith(route))
+	);
 
 	let navigation_data = tiles.slice(0, 8);
 
@@ -119,7 +128,7 @@
 						.from(element, {
 							yPercent: -100,
 							paused: true,
-							duration: 0.2
+							duration: 0.3
 						})
 						.progress(1);
 
@@ -139,14 +148,26 @@
 	const collectionAnimation = createCollectionAnimation();
 	const menuAnimation = createMenuAnimation();
 	const navAnimation = createNavAnimation();
+
+	beforeNavigate(() => {
+		collectionAnimation.reverse();
+	});
 </script>
 
 <nav
-	class="bg-background text-foreground fixed z-[100] flex h-12 w-full items-center justify-between px-[var(--container-padding)] lg:h-11"
+	class={[
+		'bg-background fixed z-[100] flex h-12 w-full items-center justify-between px-[var(--container-padding)] transition-colors duration-300 lg:h-11',
+		isProductPage && !scrolled && 'bg-transparent'
+	]}
 	{@attach navAnimation.to()}
 >
 	<img src={logo} alt="techno ceram" class="size-6" />
-	<ul class="hidden items-center gap-3 text-xs font-medium uppercase lg:flex">
+	<ul
+		class={[
+			'hidden items-center gap-3 text-xs font-medium uppercase lg:flex',
+			isProductPage && !scrolled && 'text-foreground'
+		]}
+	>
 		<li
 			onmouseenter={() => collectionAnimation.play()}
 			onmouseleave={() => collectionAnimation.reverse()}
@@ -207,7 +228,10 @@
 			</a>
 		</li>
 		<li>
-			<a href="/" class="group relative block cursor-pointer overflow-hidden tracking-wider">
+			<a
+				href="/products/okay"
+				class="group relative block cursor-pointer overflow-hidden tracking-wider"
+			>
 				<span
 					class="block transition-transform duration-[0.6s] ease-[cubic-bezier(.16,1,.3,1)] will-change-transform group-hover:-translate-y-full"
 				>
@@ -308,7 +332,6 @@
 ></div>
 <!-- svelte-ignore a11y_no_static_element_interactions -->
 <div
-	onmouseleave={() => collectionAnimation.reverse()}
 	onmouseenter={() => collectionAnimation.play()}
 	class="bg-background collection_menu fixed top-0 left-0 z-50 h-0 w-full overflow-hidden"
 	id="collection_menu"
@@ -333,8 +356,12 @@
 		{/each}
 	</div>
 </div>
+
 <svelte:window
 	onresize={() => {
 		collectionAnimation.invalidate();
+	}}
+	onscroll={(e) => {
+		scrolled = e.currentTarget.scrollY > 50;
 	}}
 />
