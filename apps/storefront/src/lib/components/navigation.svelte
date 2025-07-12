@@ -161,7 +161,9 @@
 	]}
 	{@attach navAnimation.to()}
 >
-	<img src={logo} alt="techno ceram" class="size-6" />
+	<a href="/">
+		<img src={logo} alt="techno ceram" class="size-6" />
+	</a>
 	<ul
 		class={[
 			'hidden items-center gap-3 text-xs font-medium uppercase lg:flex',
@@ -186,7 +188,10 @@
 			</p>
 		</li>
 		<li>
-			<a href="/" class="group relative block cursor-pointer overflow-hidden tracking-wider">
+			<a
+				href="/showrooms"
+				class="group relative block cursor-pointer overflow-hidden tracking-wider"
+			>
 				<span
 					class="block transition-transform duration-[0.6s] ease-[cubic-bezier(.16,1,.3,1)] will-change-transform group-hover:-translate-y-full"
 				>
@@ -196,42 +201,42 @@
 					class="absolute top-0 left-0 w-full translate-y-full transition-transform duration-[0.6s] ease-[cubic-bezier(.16,1,.3,1)] will-change-transform group-hover:translate-y-0"
 				>
 					showrooms
-				</span>
-			</a>
-		</li>
-		<li>
-			<a href="/" class="group relative block cursor-pointer overflow-hidden tracking-wider">
-				<span
-					class="block transition-transform duration-[0.6s] ease-[cubic-bezier(.16,1,.3,1)] will-change-transform group-hover:-translate-y-full"
-				>
-					the story
-				</span>
-				<span
-					class="absolute top-0 left-0 w-full translate-y-full transition-transform duration-[0.6s] ease-[cubic-bezier(.16,1,.3,1)] will-change-transform group-hover:translate-y-0"
-				>
-					the story
-				</span>
-			</a>
-		</li>
-		<li>
-			<a href="/" class="group relative block cursor-pointer overflow-hidden tracking-wider">
-				<span
-					class="block transition-transform duration-[0.6s] ease-[cubic-bezier(.16,1,.3,1)] will-change-transform group-hover:-translate-y-full"
-				>
-					journal
-				</span>
-				<span
-					class="absolute top-0 left-0 w-full translate-y-full transition-transform duration-[0.6s] ease-[cubic-bezier(.16,1,.3,1)] will-change-transform group-hover:translate-y-0"
-				>
-					journal
 				</span>
 			</a>
 		</li>
 		<li>
 			<a
-				href="/products/okay"
+				href="/the-story"
 				class="group relative block cursor-pointer overflow-hidden tracking-wider"
 			>
+				<span
+					class="block transition-transform duration-[0.6s] ease-[cubic-bezier(.16,1,.3,1)] will-change-transform group-hover:-translate-y-full"
+				>
+					the story
+				</span>
+				<span
+					class="absolute top-0 left-0 w-full translate-y-full transition-transform duration-[0.6s] ease-[cubic-bezier(.16,1,.3,1)] will-change-transform group-hover:translate-y-0"
+				>
+					the story
+				</span>
+			</a>
+		</li>
+		<li>
+			<a href="/journal" class="group relative block cursor-pointer overflow-hidden tracking-wider">
+				<span
+					class="block transition-transform duration-[0.6s] ease-[cubic-bezier(.16,1,.3,1)] will-change-transform group-hover:-translate-y-full"
+				>
+					journal
+				</span>
+				<span
+					class="absolute top-0 left-0 w-full translate-y-full transition-transform duration-[0.6s] ease-[cubic-bezier(.16,1,.3,1)] will-change-transform group-hover:translate-y-0"
+				>
+					journal
+				</span>
+			</a>
+		</li>
+		<li>
+			<a href="/contact" class="group relative block cursor-pointer overflow-hidden tracking-wider">
 				<span
 					class="block transition-transform duration-[0.6s] ease-[cubic-bezier(.16,1,.3,1)] will-change-transform group-hover:-translate-y-full"
 				>
@@ -291,7 +296,7 @@
 			</li>
 			<li class="menu_link invisible">
 				<a
-					href="/"
+					href="/showrooms"
 					class="border-foreground-2/20 inline-block w-full border-b py-5 text-xl leading-[1.2cap] uppercase"
 				>
 					showrooms
@@ -299,7 +304,7 @@
 			</li>
 			<li class="menu_link invisible">
 				<a
-					href="/"
+					href="/journal"
 					class="border-foreground-2/20 inline-block w-full border-b py-5 text-xl leading-[1.2cap] uppercase"
 				>
 					journal
@@ -307,7 +312,7 @@
 			</li>
 			<li class="menu_link invisible">
 				<a
-					href="/"
+					href="/the-story"
 					class="border-foreground-2/20 inline-block w-full border-b py-5 text-xl leading-[1.2cap] uppercase"
 				>
 					the story
@@ -315,7 +320,7 @@
 			</li>
 			<li class="menu_link invisible">
 				<a
-					href="/"
+					href="/contact"
 					class="border-foreground-2/20 inline-block w-full border-b py-5 text-xl leading-[1.2cap] uppercase"
 				>
 					contact
@@ -333,6 +338,7 @@
 <!-- svelte-ignore a11y_no_static_element_interactions -->
 <div
 	onmouseenter={() => collectionAnimation.play()}
+	onmouseleave={() => collectionAnimation.reverse()}
 	class="bg-background collection_menu fixed top-0 left-0 z-50 h-0 w-full overflow-hidden"
 	id="collection_menu"
 >
