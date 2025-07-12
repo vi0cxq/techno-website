@@ -16,13 +16,19 @@
 					<p class="mb-2 text-sm font-bold uppercase">Company</p>
 					<ul class="flex flex-col gap-0.5 text-sm">
 						<li>
-							<a href="http://">Facebook</a>
+							<a href="/">Home</a>
 						</li>
 						<li>
-							<a href="http://">Instagram</a>
+							<a href="/the-story">The Story</a>
 						</li>
 						<li>
-							<a href="http://">TikTok</a>
+							<a href="/showrooms">Showrooms</a>
+						</li>
+						<li>
+							<a href="/journal">Journal</a>
+						</li>
+						<li>
+							<a href="/contact">Contact</a>
 						</li>
 					</ul>
 				</div>
@@ -30,27 +36,27 @@
 					<p class="mb-2 text-sm font-bold uppercase">social</p>
 					<ul class="flex flex-col gap-0.5 text-sm">
 						<li>
-							<a href="http://">Facebook</a>
+							<a target="_blank" href="https://www.facebook.com/Technoceramdz">Facebook</a>
 						</li>
 						<li>
-							<a href="http://">Instagram</a>
+							<a target="_blank" href="https://www.instagram.com/technoceramdz">Instagram</a>
 						</li>
 						<li>
-							<a href="http://">TikTok</a>
+							<a target="_blank" href="https://www.tiktok.com/@technoceram_dz">TikTok</a>
+						</li>
+						<li>
+							<a target="_blank" href="https://www.youtube.com/@technoceramdz">Youtube</a>
 						</li>
 					</ul>
 				</div>
 				<div>
-					<p class="mb-2 text-sm font-bold uppercase">Legal</p>
+					<p class="mb-2 text-sm font-bold uppercase">legal</p>
 					<ul class="flex flex-col gap-0.5 text-sm">
 						<li>
-							<a href="http://">Facebook</a>
+							<a href="/">Privacy Policy</a>
 						</li>
 						<li>
-							<a href="http://">Instagram</a>
-						</li>
-						<li>
-							<a href="http://">TikTok</a>
+							<a href="/">Terms & Conditions</a>
 						</li>
 					</ul>
 				</div>
