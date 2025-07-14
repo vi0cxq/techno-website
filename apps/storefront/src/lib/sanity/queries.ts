@@ -32,8 +32,9 @@ export type Showroom = {
 export interface Post {
 	_type: 'post';
 	_id: string;
-	title: string;
 	slug: Slug;
+	title: string;
+	tags: string[];
 	excerpt?: string;
 	mainImage: ImageAsset;
 	body: PortableTextBlock[];

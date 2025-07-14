@@ -9,6 +9,7 @@ export const postType = defineType({
       name: 'title',
       title: 'Title',
       type: 'string',
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'slug',
@@ -27,6 +28,13 @@ export const postType = defineType({
       rows: 4,
     }),
     defineField({
+      name: 'tags',
+      title: 'Tags',
+      type: 'array',
+      of: [{type: 'string'}],
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
       name: 'mainImage',
       title: 'Cover image',
       type: 'image',
@@ -34,6 +42,7 @@ export const postType = defineType({
         hotspot: true,
       },
       fields: [{name: 'label', type: 'string', validation: (Rule) => Rule.required()}],
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'body',
@@ -46,6 +55,7 @@ export const postType = defineType({
           fields: [{name: 'label', type: 'string', validation: (Rule) => Rule.required()}],
         },
       ],
+      validation: (Rule) => Rule.required(),
     }),
   ],
   preview: {

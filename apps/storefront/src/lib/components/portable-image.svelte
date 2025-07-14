@@ -6,7 +6,6 @@
 	let altText = $derived(value?.label || 'Image');
 
 	let dimensions = getImageDimensions(value.asset);
-	console.log(dimensions);
 </script>
 
 {#if value?.asset._ref}
