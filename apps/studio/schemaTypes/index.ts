@@ -30,6 +30,7 @@ import {faqType} from './documents/faqType'
 import {privacyPolicy} from './singletons/privacyPolicy'
 import {termsOfService} from './singletons/termsService'
 import {showroomType} from './documents/showroomType'
+import {postType} from './documents/postType'
 
 // Objects used as annotations must be imported first
 const annotations = [linkEmailType, linkExternalType, linkInternalType, linkProductType]
@@ -59,6 +60,7 @@ const documents = [
   colorType,
   faqType,
   showroomType,
+  postType,
 ]
 
 export const schemaTypes = [...annotations, ...objects, ...singletons, ...documents]

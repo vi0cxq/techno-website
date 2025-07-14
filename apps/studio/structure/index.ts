@@ -5,6 +5,7 @@ import home from './homeStructure'
 import settings from './settingStructure'
 import category from './categoryStructure'
 import showroom from './showroomStructure'
+import journal from './postStructure'
 import faq from './faqStructure'
 import terms from './termsServiceStructure'
 import privacy from './privacyPolicyStructure'
@@ -27,6 +28,7 @@ const hiddenDocTypes = (listItem: ListItemBuilder) => {
     'settings',
     'category',
     'showroom',
+    'journal',
     'currency',
     'material',
     'size',
@@ -50,6 +52,7 @@ export const structure: StructureResolver = (S, context) =>
       collections(S, context),
       category(S, context),
       showroom(S, context),
+      journal(S, context),
       S.divider(),
       settings(S, context),
       ...S.documentTypeListItems().filter(hiddenDocTypes),

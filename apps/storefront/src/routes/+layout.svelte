@@ -1,12 +1,18 @@
 <script lang="ts">
+	import { browser } from '$app/environment';
+	import { onMount, setContext } from 'svelte';
+	import { page } from '$app/state';
+
+	import { VisualEditing, isPreviewing } from '@sanity/visual-editing/svelte';
+
 	import { gsap } from 'gsap';
 	import { ScrollTrigger } from 'gsap/ScrollTrigger';
 	import Lenis from 'lenis';
+
 	import Footer from '$lib/components/footer.svelte';
 	import Navigation from '$lib/components/navigation.svelte';
+	import LiveMode from '$lib/components/LiveMode.svelte';
 	import '../app.css';
-	import { browser } from '$app/environment';
-	import { onMount, setContext } from 'svelte';
 
 	let lenis: Lenis;
 
@@ -31,8 +37,23 @@
 	let { children } = $props();
 </script>
 
+{#if $isPreviewing}
+	<div
+		class="bg-muted fixed bottom-4 left-1/2 z-[1000] w-fit -translate-x-1/2 rounded-full px-4 py-1 text-sm shadow"
+	>
+		<a href={`/preview/disable?redirect=${page.url.pathname}`} class="preview-toggle">
+			<span class="font-medium">Preview Enabled</span>
+			<span class="hover:text-red-600">Disable Preview</span>
+		</a>
+	</div>
+{/if}
+
 <Navigation />
 <main class="bg-background relative z-10 mb-[100vh] flex min-h-screen flex-col">
 	{@render children()}
 </main>
 <Footer />
+{#if $isPreviewing}
+	<VisualEditing />
+	<LiveMode />
+{/if}

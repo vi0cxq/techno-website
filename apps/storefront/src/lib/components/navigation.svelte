@@ -349,12 +349,7 @@
 			<a href={`/collections/${tile.name}`} class="navigation_card invisible translate-y-4">
 				<div class="flex flex-col gap-1">
 					<div class="relative aspect-[4/2.3] flex-1 overflow-hidden">
-						<img
-							src={footerImg}
-							alt=""
-							srcset=""
-							class="absolute top-0 left-0 size-full object-cover"
-						/>
+						<img src={footerImg} alt={tile.name} class="size-full object-cover" />
 					</div>
 					<p class="text-sm font-medium underline">{tile.name}</p>
 				</div>

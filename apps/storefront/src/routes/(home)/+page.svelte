@@ -1,8 +1,18 @@
-<script>
+<script lang="ts">
 	import FeaturedProducts from './sections/featured-products.svelte';
 	import Ig from './sections/ig.svelte';
 	import Journal from './sections/journal.svelte';
 	import Showrooms from './sections/showrooms.svelte';
+
+	import type { PageData } from './$types';
+
+	import { useQuery } from '@sanity/svelte-loader';
+
+	let { data }: { data: PageData } = $props();
+
+	const query = $derived.by(() => {
+		return useQuery(data);
+	});
 </script>
 
 <header
@@ -48,6 +58,6 @@
 </section>
 
 <FeaturedProducts />
-<Showrooms />
+<Showrooms showrooms={$query.data} />
 <Journal />
 <Ig />
