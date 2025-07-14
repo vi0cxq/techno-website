@@ -1,6 +1,7 @@
 name = "techno-website"
 compatibility_flags = ["nodejs_compat"]
 compatibility_date = "2024-09-23"
+main = ".svelte-kit/cloudflare/_worker.js"
 
 
 [vars]
@@ -12,3 +13,7 @@ PUBLIC_SANITY_API_VERSION = "2024-03-15"
 PUBLIC_SITE_URL = "http://localhost:5173"
 # Private
 SANITY_VIEWER_TOKEN = "skUVtyDk4il7ldfLXoo3Z9Z5rFJLz05B2JHAJjAvLgzh5uhIa7ig9lDDi2eRCbTlUQkl3MzhMRCc4em7FDi85aVntImFHAmNEqfPaU7HF5zRVMRQtr6ckehyVYNgO0ypVZtTOjTfasbKscZLT2sxfyFspeghzm5RPxQqw9g50feqVVbLy7my"
+
+[assets]
+binding = "ASSETS"
+directory = ".svelte-kit/cloudflare"
