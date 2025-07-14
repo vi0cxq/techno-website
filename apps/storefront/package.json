@@ -6,12 +6,14 @@
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build",
-		"preview": "vite preview",
+		"preview": "bun run build && wrangler dev",
 		"prepare": "svelte-kit sync || echo ''",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"format": "prettier --write .",
 		"lint": "prettier --check . && eslint .",
+		"deploy": "bun run build && wrangler deploy",
+		"cf-typegen": "wrangler types ./src/worker-configuration.d.ts",
 		"scn": "bunx shadcn-svelte@latest add"
 	},
 	"devDependencies": {
@@ -48,7 +50,8 @@
 		"tw-animate-css": "^1.3.4",
 		"typescript": "^5.8.3",
 		"typescript-eslint": "^8.35.0",
-		"vite": "^6.3.5"
+		"vite": "^6.3.5",
+		"wrangler": "^4.24.3"
 	},
 	"dependencies": {
 		"@sanity/asset-utils": "^2.2.1",
