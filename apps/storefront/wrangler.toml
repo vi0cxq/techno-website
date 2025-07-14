@@ -2,3 +2,13 @@ name = "techno-website"
 compatibility_date = "2024-07-14"
 compatibility_flags = ["nodejs_compat"]
 pages_build_output_dir = ".svelte-kit/cloudflare"
+
+[vars]
+# Public
+PUBLIC_SANITY_PROJECT_ID = "spfifpte"
+PUBLIC_SANITY_DATASET = "production"
+PUBLIC_SANITY_STUDIO_URL = "https://technoceram.sanity.studio"
+PUBLIC_SANITY_API_VERSION = "2024-03-15"
+PUBLIC_SITE_URL = "http://localhost:5173"
+# Private
+SANITY_VIEWER_TOKEN = "skUVtyDk4il7ldfLXoo3Z9Z5rFJLz05B2JHAJjAvLgzh5uhIa7ig9lDDi2eRCbTlUQkl3MzhMRCc4em7FDi85aVntImFHAmNEqfPaU7HF5zRVMRQtr6ckehyVYNgO0ypVZtTOjTfasbKscZLT2sxfyFspeghzm5RPxQqw9g50feqVVbLy7my"
