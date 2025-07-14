@@ -11,6 +11,7 @@
       "name": "storefront",
       "version": "0.0.1",
       "dependencies": {
+        "@sanity/asset-utils": "^2.2.1",
         "@sanity/client": "^7.6.0",
         "@sanity/svelte-loader": "^1.13.43",
         "@sanity/visual-editing": "^2.15.2",
