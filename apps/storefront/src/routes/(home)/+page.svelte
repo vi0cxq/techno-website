@@ -3,6 +3,7 @@
 	import Ig from './sections/ig.svelte';
 	import Journal from './sections/journal.svelte';
 	import Showrooms from './sections/showrooms.svelte';
+	import heroImg from '$lib/assets/images/ceram.webp?enhanced';
 
 	import type { PageData } from './$types';
 
@@ -15,9 +16,12 @@
 	});
 </script>
 
-<header
-	class="relative flex min-h-screen items-end justify-start bg-[url($lib/assets/images/ceram.webp)] bg-cover p-[var(--container-padding)]"
->
+<header class="relative flex min-h-screen items-end p-[var(--container-padding)]">
+	<enhanced:img
+		src={heroImg}
+		alt="techno ceram"
+		style="position: absolute; width: 100%; height: 100%; object-fit: cover; top: 0; left: 0;"
+	/>
 	<div class="bg-foreground/20 absolute top-0 left-0 size-full"></div>
 	<h1 class="text-background z-10 w-[15ch] text-5xl leading-[1.4cap]">
 		Defining <span class="font-ivy">Spaces</span> with
