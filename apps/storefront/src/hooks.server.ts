@@ -1,19 +1,13 @@
 import { createRequestHandler, setServerClient } from '@sanity/svelte-loader';
-import { sequence } from '@sveltejs/kit/hooks';
 import { serverClient } from '$lib/server/sanity/client';
-import type { Handle } from '@sveltejs/kit';
 
-export const preload: Handle = async ({ event, resolve }) => {
-	const response = await resolve(event, {
-		preload: ({ type }) => {
-			return type === 'font' || type === 'js' || type === 'css';
-		}
-	});
-	return response;
-};
-
+// Sets the client to be used by `loadQuery` when fetching data on the server.
+// The loader will handle setting the correct fetch parameters, including
+// perspective. This isn't a hook, but it's a good place to call this function
+// as this file is executed once per app initialization.
 setServerClient(serverClient);
 
-export const sanity = createRequestHandler();
-
-export const handle = sequence(preload, sanity);
+// This convenience function sets up preview mode endpoints and attaches useful
+// helpers to the `event.locals` Svelte object, such as a preconfigured
+// `loadQuery` function and `preview` state.
+export const handle = createRequestHandler();
