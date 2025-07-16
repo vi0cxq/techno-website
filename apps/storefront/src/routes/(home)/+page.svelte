@@ -1,13 +1,16 @@
 <script lang="ts">
-	import FeaturedProducts from './sections/featured-products.svelte';
-	import Ig from './sections/ig.svelte';
-	import Journal from './sections/journal.svelte';
-	import Showrooms from './sections/showrooms.svelte';
-	import heroImg from '$lib/assets/images/ceram.webp?enhanced';
-
+	import { PUBLIC_SITE_URL } from '$env/static/public';
 	import type { PageData } from './$types';
 
 	import { useQuery } from '@sanity/svelte-loader';
+	import { MetaTags } from 'svelte-meta-tags';
+
+	import Ig from './sections/ig.svelte';
+	import Journal from './sections/journal.svelte';
+	import Showrooms from './sections/showrooms.svelte';
+	import FeaturedProducts from './sections/featured-products.svelte';
+
+	import About from './sections/about.svelte';
 
 	let { data }: { data: PageData } = $props();
 
@@ -16,52 +19,45 @@
 	});
 </script>
 
+<MetaTags
+	title="Techno Ceram - Premium Ceramic Tiles"
+	titleTemplate="%s"
+	description="Techno Ceram offers premium ceramic tiles combining timeless design and high performance. Discover our unique collections."
+	canonical={PUBLIC_SITE_URL}
+	openGraph={{
+		title: 'Techno Ceram',
+		description:
+			'Techno Ceram offers premium ceramic tiles combining timeless design and high performance. Discover our unique collections.',
+		url: PUBLIC_SITE_URL,
+		type: 'website',
+		images: [
+			{
+				url: `${PUBLIC_SITE_URL}/og/home_og.jpg`,
+				width: 1200,
+				height: 648,
+				alt: 'Techno Ceram - Premium Ceramic Tiles'
+			}
+		]
+	}}
+/>
+
 <header class="relative flex min-h-screen items-end p-[var(--container-padding)]">
 	<enhanced:img
-		src={heroImg}
+		src="/static/images/ceram.webp?w=2560"
 		alt="techno ceram"
 		style="position: absolute; width: 100%; height: 100%; object-fit: cover; top: 0; left: 0;"
+		fetchpriority="high"
+		sizes="min(1920px, 100vw)"
 	/>
-	<div class="bg-foreground/20 absolute top-0 left-0 size-full"></div>
+	<div class="bg-foreground/20 absolute left-0 top-0 size-full"></div>
 	<h1 class="text-background z-10 w-[15ch] text-5xl leading-[1.4cap]">
 		Defining <span class="font-ivy">Spaces</span> with
 		<span class="font-ivy"> Timeless </span>
 		Elegance
 	</h1>
 </header>
-<section
-	class="min-h-screen gap-[var(--gap)] px-[var(--container-padding)] py-[var(--section-padding)] md:flex"
->
-	<div class="w-1/3">
-		<p class="text-lg uppercase">about</p>
-	</div>
-
-	<div class="flex-1">
-		<p class="space-y-10 pt-3 text-xl font-medium md:w-[38ch] md:space-y-20 md:pt-0">
-			<span class="inline-block">
-				An innovation born from the innate drive to improve, renew, and reinvent the surfaces around
-				us.
-			</span>
-			<span class="inline-block">
-				Ceram blends advanced technology with a legacy of craftsmanship—an invitation to push past
-				the limits of standardization and create a bold, contemporary, and timeless aesthetic.
-			</span>
-
-			<span class="inline-block">
-				This is a "new" that’s defined not only by what it creates, but by how it’s created.A
-				process. A philosophy. A lifestyle.
-			</span>
-		</p>
-		<div class="mt-10 flex items-start gap-[var(--gap)] md:mt-20">
-			<div
-				class="aspect-[3/4] w-[clamp(12.5rem,-2.5rem+75vw,35rem)] bg-pink-800 md:w-[28rem] md:bg-red-700 lg:w-[35rem]"
-			></div>
-			<div class="aspect-[3/4] flex-1 bg-green-900 md:w-[14rem] md:flex-none"></div>
-		</div>
-	</div>
-</section>
-
-<FeaturedProducts />
-<Showrooms showrooms={$query.data} />
-<Journal />
+<About />
+<FeaturedProducts featuredProducts={$query.data.featuredProducts} />
+<Showrooms showrooms={$query.data.showrooms} />
+<Journal posts={$query.data.posts} />
 <Ig />

@@ -4,6 +4,17 @@ import groq from 'groq';
 export const postQuery = groq`*[_type == "post" && slug.current == $slug][0]`;
 export const postsQuery = groq`*[_type == "post" && defined(slug.current)] | order(_createdAt desc)`;
 
+export interface Post {
+	_type: 'post';
+	_id: string;
+	slug: Slug;
+	title: string;
+	tags: string[];
+	excerpt?: string;
+	mainImage: ImageAsset;
+	body: PortableTextBlock[];
+	_createdAt: string;
+}
 export const showroomsQuery = groq`*[_type == "showroom"] | order(publishedAt desc) {
         _id,
         name,
@@ -29,14 +40,49 @@ export type Showroom = {
 	alt: string;
 };
 
-export interface Post {
-	_type: 'post';
+export const tilesQuery = groq`*[
+	_type == "product" 
+	&& (!defined($collection) || $collection in collections[]->slug.current) 
+] | order(_createdAt desc)`;
+
+export type Product = {
 	_id: string;
 	slug: Slug;
-	title: string;
-	tags: string[];
-	excerpt?: string;
-	mainImage: ImageAsset;
-	body: PortableTextBlock[];
+	name: string;
+	description: PortableTextBlock[];
+	image: ImageAsset;
+	imageGallery: ImageAsset[];
 	_createdAt: string;
-}
+};
+
+export const homepageQuery = groq`{
+  "showrooms": *[_type == "showroom"] | order(_createdAt desc)[0...4] {
+    _id,
+    name,
+    slug,
+    location,
+    description,
+    publishedAt,
+    image,
+    "aspect_ratio": image.asset->metadata.dimensions.aspectRatio,
+    "alt": name
+  },
+  "posts": *[_type == "post"] | order(publishedAt desc)[0...2] {
+	_id,
+	slug,
+	title,
+	mainImage,
+  },
+  "featuredProducts": *[_type == "product" && "featured-tiles" in collections[]->slug.current] | order(_createdAt desc) {
+	_id,
+    name,
+    slug,
+    image,
+  }
+}`;
+
+export type HomePage = {
+	showrooms: Showroom[];
+	posts: Post[];
+	featuredProducts: Product[];
+};

@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/state';
 	import { tiles } from '$lib/data';
-	import headerImage from '$lib/assets/images/ceram.webp';
 	import Faq from '$lib/components/faq.svelte';
 
 	let handpicked = tiles.slice(0, 4);
@@ -21,15 +20,15 @@
 	</div>
 	<div class="px-[var(--container-padding)]">
 		<div class="relative aspect-[5/4] w-full overflow-hidden md:aspect-[10/4]">
-			<img
-				src={headerImage}
+			<enhanced:img
+				src="/static/images/ceram.webp?w=2560"
 				alt=""
 				srcset=""
-				class="absolute top-0 left-0 size-full object-cover object-center"
+				class="absolute left-0 top-0 size-full object-cover object-center"
 			/>
 		</div>
 	</div>
-	<div class="mt-14 mb-5 flex items-center justify-between px-[var(--container-padding)]">
+	<div class="mb-5 mt-14 flex items-center justify-between px-[var(--container-padding)]">
 		<p class="text-sm font-medium">(50)</p>
 		<button class="text-sm font-medium underline"> FILTER OPTIONS </button>
 	</div>
@@ -40,10 +39,10 @@
 			<article>
 				<a href="/">
 					<div class="relative aspect-[4/5] w-full">
-						<img
-							src={headerImage}
+						<enhanced:img
+							src="/static/images/ceram.webp?w=2560"
 							alt={tile.name}
-							class="absolute top-0 left-0 size-full object-cover"
+							class="absolute left-0 top-0 size-full object-cover"
 						/>
 					</div>
 
@@ -71,10 +70,10 @@
 				<article>
 					<a href="/">
 						<div class="relative aspect-[4/5] w-full">
-							<img
-								src={headerImage}
+							<enhanced:img
+								src="/static/images/ceram.webp?w=2560"
 								alt={tile.name}
-								class="absolute top-0 left-0 size-full object-cover"
+								class="absolute left-0 top-0 size-full object-cover"
 							/>
 						</div>
 

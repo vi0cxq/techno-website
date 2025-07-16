@@ -2,10 +2,12 @@
 	import { ChevronLeft, ChevronRight } from 'lucide-svelte';
 	import type { EmblaCarouselType, EmblaOptionsType } from 'embla-carousel';
 	import emblaCarouselSvelte from 'embla-carousel-svelte';
-	import footerImg from '$lib/assets/images/footer.webp';
-	import { tiles } from '$lib/data';
+	import type { Product } from '$lib/sanity/queries';
+	import { urlFor } from '$lib/sanity/image';
 
 	let options: EmblaOptionsType = { loop: false, align: 'start' };
+
+	let { featuredProducts }: { featuredProducts: Product[] } = $props();
 
 	let progressRef: HTMLDivElement;
 	let emblaApi = $state<EmblaCarouselType>();
@@ -59,20 +61,27 @@
 			onemblaInit={onInit}
 		>
 			<div class="carousel__container">
-				{#each tiles as tile (tile.id)}
+				{#each featuredProducts as product (product._id)}
 					<div class="carousel__slide">
-						<article class="">
-							<a href="/">
-								<div class="relative aspect-[4/5] w-full">
+						<article>
+							<a href={`/products/${product.slug.current}`}>
+								<div class="relative aspect-[4/5] w-full overflow-hidden">
 									<img
-										src={footerImg}
-										alt={tile.name}
-										class="absolute top-0 left-0 size-full object-cover"
+										src={urlFor(product.image).url()}
+										alt={product.name}
+										class="absolute left-0 top-0 size-full scale-105 object-cover duration-[0.4s] ease-[cubic-bezier(.16,1,.3,1)] will-change-transform hover:scale-100"
+										sizes="(min-width:1024px) 800px, (min-width:768px) 640px, 100vw"
+										srcset="
+												{urlFor(product.image).width(400).url()} 400w,
+												{urlFor(product.image).width(800).url()} 800w,
+												{urlFor(product.image).width(1200).url()} 1200w,
+												{urlFor(product.image).width(1600).url()} 1600w
+												"
 									/>
 								</div>
 
 								<h2 class="py-1 text-base font-medium underline">
-									{tile.name}
+									{product.name}
 								</h2>
 							</a>
 						</article>

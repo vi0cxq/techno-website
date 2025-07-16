@@ -1,5 +1,4 @@
 <script lang="ts">
-	import headerImage from '$lib/assets/images/ceram.webp';
 	import * as Accordion from '$lib/components/ui/accordion/index.js';
 </script>
 
@@ -8,7 +7,11 @@
 >
 	<div class="hidden flex-1 md:block">
 		<div class="relative aspect-square">
-			<img src={headerImage} alt="" class="absolute top-0 left-0 size-full object-cover" />
+			<enhanced:img
+				src="/static/images/ceram.webp?w=2560"
+				alt=""
+				class="absolute left-0 top-0 size-full object-cover"
+			/>
 		</div>
 	</div>
 	<div class="flex-1">
@@ -20,7 +23,7 @@
 				>
 					What’s the best type of tile for high-traffic areas?
 				</Accordion.Trigger>
-				<Accordion.Content class="pt-2 pb-6">
+				<Accordion.Content class="pb-6 pt-2">
 					<p class="max-w-[80ch]">
 						Porcelain tiles are a great choice—they're dense, durable, and resistant to wear, making
 						them ideal for busy spaces like kitchens, hallways, and commercial settings.
@@ -33,7 +36,7 @@
 				>
 					What’s the best type of tile for high-traffic areas?
 				</Accordion.Trigger>
-				<Accordion.Content class="pt-2 pb-6">
+				<Accordion.Content class="pb-6 pt-2">
 					<p class="max-w-[80ch]">
 						Porcelain tiles are a great choice—they're dense, durable, and resistant to wear, making
 						them ideal for busy spaces like kitchens, hallways, and commercial settings.
@@ -46,7 +49,7 @@
 				>
 					What’s the best type of tile for high-traffic areas?
 				</Accordion.Trigger>
-				<Accordion.Content class="pt-2 pb-6">
+				<Accordion.Content class="pb-6 pt-2">
 					<p class="max-w-[80ch]">
 						Porcelain tiles are a great choice—they're dense, durable, and resistant to wear, making
 						them ideal for busy spaces like kitchens, hallways, and commercial settings.
@@ -59,7 +62,7 @@
 				>
 					What’s the best type of tile for high-traffic areas?
 				</Accordion.Trigger>
-				<Accordion.Content class="pt-2 pb-6">
+				<Accordion.Content class="pb-6 pt-2">
 					<p class="max-w-[80ch]">
 						Porcelain tiles are a great choice—they're dense, durable, and resistant to wear, making
 						them ideal for busy spaces like kitchens, hallways, and commercial settings.
@@ -72,7 +75,7 @@
 				>
 					What’s the best type of tile for high-traffic areas?
 				</Accordion.Trigger>
-				<Accordion.Content class="pt-2 pb-6">
+				<Accordion.Content class="pb-6 pt-2">
 					<p class="max-w-[80ch]">
 						Porcelain tiles are a great choice—they're dense, durable, and resistant to wear, making
 						them ideal for busy spaces like kitchens, hallways, and commercial settings.

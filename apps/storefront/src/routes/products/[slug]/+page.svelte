@@ -4,7 +4,7 @@
 	import emblaCarouselSvelte from 'embla-carousel-svelte';
 	import type { EmblaCarouselType, EmblaOptionsType } from 'embla-carousel';
 
-	import headerImage from '$lib/assets/images/ceram.webp';
+	import headerImage from '$lib/assets/images/jimmy.jpg';
 	import jimmy from '$lib/assets/images/jimmy.jpg';
 	import Faq from '$lib/components/faq.svelte';
 	import { tiles } from '$lib/data';
@@ -45,7 +45,7 @@ Wood-effect tiles are much easier to lay, maintain and clean than  real wooden f
 <main>
 	<div class="mb-[var(--section-padding)] flex flex-col lg:flex-row">
 		<div
-			class="lg:bg-background-2 top-0 flex items-center justify-center gap-3 pt-12 lg:sticky lg:h-screen lg:w-1/2 lg:pt-0 lg:pb-3"
+			class="lg:bg-background-2 top-0 flex items-center justify-center gap-3 pt-12 lg:sticky lg:h-screen lg:w-1/2 lg:pb-3 lg:pt-0"
 		>
 			<div class="relative aspect-[8/9] w-[95%] md:w-[72%]">
 				<div
@@ -69,7 +69,7 @@ Wood-effect tiles are much easier to lay, maintain and clean than  real wooden f
 				</div>
 
 				<div
-					class="absolute -bottom-20 flex h-16 gap-2 xl:top-0 xl:-left-[5vw] xl:w-16 xl:flex-col"
+					class="absolute -bottom-20 flex h-16 gap-2 xl:-left-[5vw] xl:top-0 xl:w-16 xl:flex-col"
 				>
 					{#each handpicked as tile, i (tile)}
 						<button
@@ -197,7 +197,7 @@ Wood-effect tiles are much easier to lay, maintain and clean than  real wooden f
 							<img
 								src={headerImage}
 								alt={tile.name}
-								class="absolute top-0 left-0 size-full object-cover"
+								class="absolute left-0 top-0 size-full object-cover"
 							/>
 						</div>
 

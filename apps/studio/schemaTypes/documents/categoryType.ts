@@ -28,7 +28,7 @@ export const categoryType = defineType({
       options: {
         hotspot: true,
       },
-      validation: (rule) => rule.required(),
+      // validation: (rule) => rule.required(),
     }),
     defineField({
       name: 'publishedAt',

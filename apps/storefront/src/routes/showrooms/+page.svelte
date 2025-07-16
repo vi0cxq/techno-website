@@ -13,7 +13,7 @@
 
 <main class="px-[var(--container-padding)] py-[var(--section-padding)]">
 	<div class="border-foreground/30 border-b pb-8">
-		<h3 class="w-full max-w-[15ch] text-2xl leading-[1.35cap] font-medium uppercase sm:-ml-1">
+		<h3 class="w-full max-w-[15ch] text-2xl font-medium uppercase leading-[1.35cap] sm:-ml-1">
 			showrooms
 			<span class="font-ivy text-lg">({$query.data.length})</span>
 		</h3>
@@ -32,10 +32,17 @@
 						style="padding-top: {100 / showroom.aspect_ratio}%;"
 					>
 						<img
-							src={urlFor(showroom.image).fit('max').width(800).url()}
+							src={urlFor(showroom.image).fit('max').width(1200).url()}
 							alt={showroom.name}
+							class="absolute left-0 top-0 size-full scale-105 object-cover duration-[0.4s] ease-[cubic-bezier(.16,1,.3,1)] will-change-transform hover:scale-100"
 							fetchpriority="high"
-							class="absolute top-0 left-0 size-full scale-105 object-cover duration-[0.4s] ease-[cubic-bezier(.16,1,.3,1)] will-change-transform hover:scale-100"
+							sizes="(min-width:1024px) 1200px, (min-width:768px) 400px, 100vw"
+							srcset="
+												{urlFor(showroom.image).width(400).url()} 400w,
+												{urlFor(showroom.image).width(1200).url()} 1200w,
+												{urlFor(showroom.image).width(1600).url()} 1600w,
+												{urlFor(showroom.image).width(2000).url()} 2000w
+												"
 						/>
 					</div>
 
