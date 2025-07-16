@@ -35,6 +35,7 @@
 					class="absolute left-0 top-[-5%] h-[115%] w-full object-cover will-change-transform"
 					sizes="(min-width:1920px) 1120px, (min-width:768px) 560px, 50vw"
 					alt="techno ceram"
+					fetchpriority="high"
 				/>
 			</ParallaxImg>
 
@@ -48,6 +49,7 @@
 					class="absolute left-0 top-[-5%] h-[115%] w-full object-cover will-change-transform"
 					sizes="(min-width:1920px) 448px, (min-width:768px) 224px, 50vw"
 					alt="techno ceram"
+					fetchpriority="high"
 				/>
 			</ParallaxImg>
 		</div>

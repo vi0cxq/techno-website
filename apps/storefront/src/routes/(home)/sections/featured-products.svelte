@@ -5,6 +5,8 @@
 	import type { Product } from '$lib/sanity/queries';
 	import { urlFor } from '$lib/sanity/image';
 
+	// width : 360 dpr : 1
+
 	let options: EmblaOptionsType = { loop: false, align: 'start' };
 
 	let { featuredProducts }: { featuredProducts: Product[] } = $props();
@@ -67,15 +69,13 @@
 							<a href={`/products/${product.slug.current}`}>
 								<div class="relative aspect-[4/5] w-full overflow-hidden">
 									<img
-										src={urlFor(product.image).url()}
-										alt={product.name}
+										src={urlFor(product.image).maxWidth(1200).format('webp').quality(80).url()}
+										alt=""
 										class="absolute left-0 top-0 size-full scale-105 object-cover duration-[0.4s] ease-[cubic-bezier(.16,1,.3,1)] will-change-transform hover:scale-100"
-										sizes="(min-width:1024px) 800px, (min-width:768px) 640px, 100vw"
+										sizes="(min-width:768px) 360px, 100vw"
 										srcset="
-												{urlFor(product.image).width(400).url()} 400w,
-												{urlFor(product.image).width(800).url()} 800w,
-												{urlFor(product.image).width(1200).url()} 1200w,
-												{urlFor(product.image).width(1600).url()} 1600w
+												{urlFor(product.image).width(540).format('webp').url()} 540w,
+												{urlFor(product.image).width(1080).format('webp').url()} 1080w,
 												"
 									/>
 								</div>
