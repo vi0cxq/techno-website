@@ -74,7 +74,7 @@
 										class="absolute left-0 top-0 size-full scale-105 object-cover duration-[0.4s] ease-[cubic-bezier(.16,1,.3,1)] will-change-transform hover:scale-100"
 										sizes="(min-width:768px) 360px, 100vw"
 										srcset="
-												{urlFor(product.image).width(540).format('webp').url()} 540w,
+												{urlFor(product.image).width(470).format('webp').url()} 470w,
 												{urlFor(product.image).width(1080).format('webp').url()} 1080w,
 												"
 									/>

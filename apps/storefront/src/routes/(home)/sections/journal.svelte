@@ -32,7 +32,7 @@
 							sizes="(min-width:1024px) 920px, (min-width:768px) 480px, 100vw"
 							srcset="
     								{urlFor(post.mainImage).width(480).url()} 480w,
-    								{urlFor(post.mainImage).width(1380).url()} 1380w,
+    								{urlFor(post.mainImage).width(980).url()} 980w,
     								{urlFor(post.mainImage).width(1840).url()} 1840w"
 						/>
 					</div>
