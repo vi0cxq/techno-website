@@ -50,11 +50,11 @@
 		sizes="min(1920px, 100vw)"
 	/>
 	<div class="bg-foreground/20 absolute left-0 top-0 size-full"></div>
-	<h1 class="text-background z-10 w-[15ch] text-5xl leading-[1.4cap]">
+	<!-- <h1 class="text-background z-10 w-[15ch] text-5xl leading-[1.4cap]">
 		Defining <span class="font-ivy">Spaces</span> with
 		<span class="font-ivy"> Timeless </span>
 		Elegance
-	</h1>
+	</h1> -->
 </header>
 <About />
 <FeaturedProducts featuredProducts={$query.data.featuredProducts} />
