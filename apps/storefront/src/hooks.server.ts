@@ -3,8 +3,6 @@ import { sequence } from '@sveltejs/kit/hooks';
 import { serverClient } from '$lib/server/sanity/client';
 import type { Handle } from '@sveltejs/kit';
 
-setServerClient(serverClient);
-
 export const preload: Handle = async ({ event, resolve }) => {
 	const response = await resolve(event, {
 		preload: ({ type }) => {
@@ -13,6 +11,8 @@ export const preload: Handle = async ({ event, resolve }) => {
 	});
 	return response;
 };
+
+setServerClient(serverClient);
 
 export const sanity = createRequestHandler();
 
