@@ -221,7 +221,7 @@
 			isProductPage && !scrolled && 'text-foreground'
 		]}
 	>
-		<!-- <li
+		<li
 			onmouseenter={() => collectionAnimation.play()}
 			onmouseleave={() => collectionAnimation.reverse()}
 		>
@@ -237,7 +237,7 @@
 					collections
 				</span>
 			</p>
-		</li> -->
+		</li>
 		<li>
 			<a
 				href="/showrooms"

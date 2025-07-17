@@ -1,22 +1,22 @@
 <script lang="ts">
 	import { PUBLIC_SITE_URL } from '$env/static/public';
-	import type { PageData } from './$types';
+	// import type { PageData } from './$types';
 
-	import { useQuery } from '@sanity/svelte-loader';
+	// import { useQuery } from '@sanity/svelte-loader';
 	import { MetaTags } from 'svelte-meta-tags';
 
 	import Ig from './sections/ig.svelte';
-	import Journal from './sections/journal.svelte';
-	import Showrooms from './sections/showrooms.svelte';
-	import FeaturedProducts from './sections/featured-products.svelte';
+	// import Journal from './sections/journal.svelte';
+	// import Showrooms from './sections/showrooms.svelte';
+	// import FeaturedProducts from './sections/featured-products.svelte';
 
 	import About from './sections/about.svelte';
 
-	let { data }: { data: PageData } = $props();
+	// let { data }: { data: PageData } = $props();
 
-	const query = $derived.by(() => {
-		return useQuery(data);
-	});
+	// const query = $derived.by(() => {
+	// 	return useQuery(data);
+	// });
 </script>
 
 <MetaTags
@@ -50,14 +50,14 @@
 		sizes="min(1920px, 100vw)"
 	/>
 	<div class="bg-foreground/20 absolute left-0 top-0 size-full"></div>
-	<!-- <h1 class="text-background z-10 w-[15ch] text-5xl leading-[1.4cap]">
+	<h1 class="text-background z-10 w-[15ch] text-5xl leading-[1.4cap]">
 		Defining <span class="font-ivy">Spaces</span> with
 		<span class="font-ivy"> Timeless </span>
 		Elegance
-	</h1> -->
+	</h1>
 </header>
 <About />
-<FeaturedProducts featuredProducts={$query.data.featuredProducts} />
+<!-- <FeaturedProducts featuredProducts={$query.data.featuredProducts} />
 <Showrooms showrooms={$query.data.showrooms} />
-<Journal posts={$query.data.posts} />
+<Journal posts={$query.data.posts} /> -->
 <Ig />
