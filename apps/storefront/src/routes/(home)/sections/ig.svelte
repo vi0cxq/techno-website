@@ -33,13 +33,16 @@
 			</ParallaxImg>
 
 			<h3
-				class="font-ivy z-10 -mt-12 max-w-[10ch] text-center text-2xl font-medium leading-[1.35cap]"
+				class="font-ivy z-10 -mt-8 max-w-[10ch] text-center text-3xl font-medium leading-[1.1cap] lg:-mt-12"
 			>
-				on instagram
+				on <br />
+				<a target="_blank" href="https://www.instagram.com/technoceramdz" class="underline">
+					instagram
+				</a>
 			</h3>
 		</div>
 		<div class="hidden flex-1 items-end justify-center md:flex">
-			<ParallaxImg classname="relative aspect-[6/4] w-2/3" reversed>
+			<ParallaxImg classname="relative aspect-[6/4] w-2/3">
 				<enhanced:img
 					src="/static/images/building_big.webp?w=560"
 					class="absolute left-0 top-[-5%] h-full w-full object-cover will-change-transform"
