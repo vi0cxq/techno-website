@@ -407,6 +407,7 @@
 								alt={tile.title}
 								class="size-full object-cover"
 								sizes="(min-width:1024px) 450px, 100vw"
+								fetchpriority="high"
 							/>
 						</div>
 						<p class="text-sm font-medium underline">{tile.title}</p>
