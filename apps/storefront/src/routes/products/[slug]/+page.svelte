@@ -90,7 +90,7 @@ Wood-effect tiles are much easier to lay, maintain and clean than  real wooden f
 			<h3 class="font-ivy max-w-[15ch] pt-2 text-2xl" style="line-height: 1.1;">
 				Lavant Light Floor Tile 600x600mm
 			</h3>
-			<div class="prose text-foreground my-8 max-w-full text-sm">
+			<div class="prose text-foreground my-8 max-w-full text-base lg:text-sm">
 				<!-- eslint-disable-next-line svelte/no-at-html-tags -->
 				{@html html}
 			</div>

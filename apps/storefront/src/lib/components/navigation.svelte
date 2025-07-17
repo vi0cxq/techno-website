@@ -115,11 +115,11 @@
 				};
 			},
 			play() {
-				animation.play();
+				animation?.play();
 				lenis.stop();
 			},
 			reverse() {
-				animation.reverse();
+				animation?.reverse();
 				lenis.start();
 			},
 			invalidate() {
@@ -160,13 +160,16 @@
 			},
 
 			toggle() {
-				if (animation.reversed()) {
-					animation.play();
+				if (animation?.reversed()) {
+					animation?.play();
 					lenis.stop();
 				} else {
-					animation.reverse();
+					animation?.reverse();
 					lenis.start();
 				}
+			},
+			reverse() {
+				animation?.reverse();
 			}
 		};
 	}
@@ -202,6 +205,7 @@
 
 	beforeNavigate(() => {
 		collectionAnimation.reverse();
+		menuAnimation.reverse();
 	});
 </script>
 

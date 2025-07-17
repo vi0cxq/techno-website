@@ -64,7 +64,7 @@
 				<img src={logoImg} alt="techno ceram" class="w-7 object-cover object-center" />
 			</div>
 
-			<div class="flex flex-1 justify-end">
+			<div class="hidden flex-1 justify-end md:flex">
 				<div class="bg-background-3 flex h-full w-full flex-col gap-0.5 sm:max-w-[20rem]">
 					<div class="relative size-full">
 						<enhanced:img

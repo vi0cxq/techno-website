@@ -24,7 +24,7 @@
 					What’s the best type of tile for high-traffic areas?
 				</Accordion.Trigger>
 				<Accordion.Content class="pb-6 pt-2">
-					<p class="max-w-[80ch]">
+					<p class="max-w-[80ch] text-base">
 						Porcelain tiles are a great choice—they're dense, durable, and resistant to wear, making
 						them ideal for busy spaces like kitchens, hallways, and commercial settings.
 					</p>
@@ -37,7 +37,7 @@
 					What’s the best type of tile for high-traffic areas?
 				</Accordion.Trigger>
 				<Accordion.Content class="pb-6 pt-2">
-					<p class="max-w-[80ch]">
+					<p class="max-w-[80ch] text-base">
 						Porcelain tiles are a great choice—they're dense, durable, and resistant to wear, making
 						them ideal for busy spaces like kitchens, hallways, and commercial settings.
 					</p>
@@ -50,7 +50,7 @@
 					What’s the best type of tile for high-traffic areas?
 				</Accordion.Trigger>
 				<Accordion.Content class="pb-6 pt-2">
-					<p class="max-w-[80ch]">
+					<p class="max-w-[80ch] text-base">
 						Porcelain tiles are a great choice—they're dense, durable, and resistant to wear, making
 						them ideal for busy spaces like kitchens, hallways, and commercial settings.
 					</p>
@@ -63,7 +63,7 @@
 					What’s the best type of tile for high-traffic areas?
 				</Accordion.Trigger>
 				<Accordion.Content class="pb-6 pt-2">
-					<p class="max-w-[80ch]">
+					<p class="max-w-[80ch] text-base">
 						Porcelain tiles are a great choice—they're dense, durable, and resistant to wear, making
 						them ideal for busy spaces like kitchens, hallways, and commercial settings.
 					</p>
@@ -76,7 +76,7 @@
 					What’s the best type of tile for high-traffic areas?
 				</Accordion.Trigger>
 				<Accordion.Content class="pb-6 pt-2">
-					<p class="max-w-[80ch]">
+					<p class="max-w-[80ch] text-base">
 						Porcelain tiles are a great choice—they're dense, durable, and resistant to wear, making
 						them ideal for busy spaces like kitchens, hallways, and commercial settings.
 					</p>

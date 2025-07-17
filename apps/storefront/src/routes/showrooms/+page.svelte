@@ -12,14 +12,14 @@
 </script>
 
 <main class="px-[var(--container-padding)] py-[var(--section-padding)]">
-	<div class="border-foreground/30 border-b pb-8">
+	<div class="border-foreground/30 border-b pb-4">
 		<h3 class="w-full max-w-[15ch] text-2xl font-medium uppercase leading-[1.35cap] sm:-ml-1">
 			showrooms
 			<span class="font-ivy text-lg">({$query.data.length})</span>
 		</h3>
 	</div>
 	<div
-		class="grid grid-cols-1 items-start gap-6 pt-8 sm:grid-cols-2 md:grid-cols-3 md:gap-8 lg:grid-cols-4"
+		class="grid grid-cols-1 items-start gap-6 pt-6 sm:grid-cols-2 md:grid-cols-3 md:gap-8 lg:grid-cols-4"
 	>
 		{#each $query.data as showroom, i (showroom._id)}
 			<article>

@@ -32,7 +32,7 @@
 	}}
 />
 
-<header class="relative flex min-h-screen items-end p-[var(--container-padding)]">
+<header class="relative flex min-h-svh items-end px-2 pb-4 md:p-[var(--container-padding)]">
 	<enhanced:img
 		src="/static/images/ceram.webp?w=1920"
 		alt="techno ceram"

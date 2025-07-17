@@ -47,10 +47,10 @@
 
 <article class="px-[var(--container-padding)] py-[var(--section-padding)]">
 	<header class="border-foreground/30 mx-auto flex max-w-3xl flex-col gap-3 border-b pb-6">
-		<h1 class="font-ivy text-xl leading-[1.5cap] font-medium sm:-ml-1">
+		<h1 class="font-ivy text-2xl font-medium leading-[1.5cap] sm:-ml-1 lg:text-xl">
 			{title}
 		</h1>
-		<p class="text-sm text-gray-600 italic">{formatDate(_createdAt)}</p>
+		<p class="text-sm italic text-gray-600">{formatDate(_createdAt)}</p>
 	</header>
 	<section
 		class="prose text-foreground [&_h1]:font-ivy mx-auto my-6 max-w-3xl [&_img]:m-0 [&_p]:text-base"
