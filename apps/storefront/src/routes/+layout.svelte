@@ -10,11 +10,10 @@
 	import { ScrollTrigger } from 'gsap/ScrollTrigger';
 	import Lenis from 'lenis';
 
-	// import Footer from '$lib/components/footer.svelte';
+	import Footer from '$lib/components/footer.svelte';
 	import Navigation from '$lib/components/navigation.svelte';
 	import LiveMode from '$lib/components/LiveMode.svelte';
 	import '../app.css';
-	// import Footer from '$lib/components/footer.svelte';
 
 	let lenis: Lenis;
 
@@ -63,7 +62,7 @@
 	<main class="bg-background relative z-10 mb-[100vh] flex min-h-screen flex-col">
 		{@render children()}
 	</main>
-	<!-- <Footer /> -->
+	<Footer />
 	{#if $isPreviewing}
 		<VisualEditing />
 		<LiveMode />
