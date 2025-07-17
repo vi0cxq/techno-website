@@ -1,22 +1,13 @@
 <script lang="ts">
 	import { PUBLIC_SITE_URL } from '$env/static/public';
-	// import type { PageData } from './$types';
 
-	// import { useQuery } from '@sanity/svelte-loader';
 	import { MetaTags } from 'svelte-meta-tags';
 
-	import Ig from './sections/ig.svelte';
-	// import Journal from './sections/journal.svelte';
-	// import Showrooms from './sections/showrooms.svelte';
-	// import FeaturedProducts from './sections/featured-products.svelte';
-
 	import About from './sections/about.svelte';
-
-	// let { data }: { data: PageData } = $props();
-
-	// const query = $derived.by(() => {
-	// 	return useQuery(data);
-	// });
+	import FeaturedProducts from './sections/featured-products.svelte';
+	import Showrooms from './sections/showrooms.svelte';
+	import Journal from './sections/journal.svelte';
+	import Ig from './sections/ig.svelte';
 </script>
 
 <MetaTags
@@ -57,7 +48,8 @@
 	</h1>
 </header>
 <About />
-<!-- <FeaturedProducts featuredProducts={$query.data.featuredProducts} />
-<Showrooms showrooms={$query.data.showrooms} />
-<Journal posts={$query.data.posts} /> -->
+
+<FeaturedProducts />
+<Showrooms />
+<Journal />
 <Ig />

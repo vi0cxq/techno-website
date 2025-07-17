@@ -4,6 +4,8 @@ import groq from 'groq';
 export const postQuery = groq`*[_type == "post" && slug.current == $slug][0]`;
 export const postsQuery = groq`*[_type == "post" && defined(slug.current)] | order(_createdAt desc)`;
 
+export const featuredPostsQuery = groq`*[_type == "post" && defined(slug.current)] | order(_createdAt desc)[0...4]`;
+
 export interface Post {
 	_type: 'post';
 	_id: string;
@@ -16,6 +18,18 @@ export interface Post {
 	_createdAt: string;
 }
 export const showroomsQuery = groq`*[_type == "showroom"] | order(publishedAt desc) {
+        _id,
+        name,
+        slug,
+        location,
+        description,
+        publishedAt,
+        image,
+        "aspect_ratio": image.asset->metadata.dimensions.aspectRatio,
+        "alt": name
+    }
+`;
+export const featuredShowroomsQuery = groq`*[_type == "showroom"] | order(publishedAt desc)[0...3] {
         _id,
         name,
         slug,
@@ -45,6 +59,13 @@ export const tilesQuery = groq`*[
 	&& (!defined($collection) || $collection in collections[]->slug.current) 
 ] | order(_createdAt desc)`;
 
+export const featuredProductsQuery = groq`*[_type == "product" && "featured-tiles" in collections[]->slug.current] | order(_createdAt desc) {
+	_id,
+    name,
+    slug,
+    image,
+  }`;
+
 export type Product = {
 	_id: string;
 	slug: Slug;
@@ -53,36 +74,4 @@ export type Product = {
 	image: ImageAsset;
 	imageGallery: ImageAsset[];
 	_createdAt: string;
-};
-
-export const homepageQuery = groq`{
-  "showrooms": *[_type == "showroom"] | order(_createdAt desc)[0...4] {
-    _id,
-    name,
-    slug,
-    location,
-    description,
-    publishedAt,
-    image,
-    "aspect_ratio": image.asset->metadata.dimensions.aspectRatio,
-    "alt": name
-  },
-  "posts": *[_type == "post"] | order(publishedAt desc)[0...2] {
-	_id,
-	slug,
-	title,
-	mainImage,
-  },
-  "featuredProducts": *[_type == "product" && "featured-tiles" in collections[]->slug.current] | order(_createdAt desc) {
-	_id,
-    name,
-    slug,
-    image,
-  }
-}`;
-
-export type HomePage = {
-	showrooms: Showroom[];
-	posts: Post[];
-	featuredProducts: Product[];
 };

@@ -4,6 +4,7 @@
 	import { page } from '$app/state';
 
 	import { VisualEditing, isPreviewing } from '@sanity/visual-editing/svelte';
+	import { QueryClient, QueryClientProvider } from '@tanstack/svelte-query';
 
 	import { gsap } from 'gsap';
 	import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -13,6 +14,7 @@
 	import Navigation from '$lib/components/navigation.svelte';
 	import LiveMode from '$lib/components/LiveMode.svelte';
 	import '../app.css';
+	import Footer from '$lib/components/footer.svelte';
 
 	let lenis: Lenis;
 
@@ -34,6 +36,14 @@
 		gsap.ticker.lagSmoothing(0);
 	});
 
+	const queryClient = new QueryClient({
+		defaultOptions: {
+			queries: {
+				enabled: browser
+			}
+		}
+	});
+
 	let { children } = $props();
 </script>
 
@@ -48,12 +58,14 @@
 	</div>
 {/if}
 
-<Navigation />
-<main class="bg-background relative z-10 flex min-h-screen flex-col">
-	{@render children()}
-</main>
-<!-- <Footer /> -->
-{#if $isPreviewing}
-	<VisualEditing />
-	<LiveMode />
-{/if}
+<QueryClientProvider client={queryClient}>
+	<Navigation />
+	<main class="bg-background relative z-10 mb-[100vh] flex min-h-screen flex-col">
+		{@render children()}
+	</main>
+	<Footer />
+	{#if $isPreviewing}
+		<VisualEditing />
+		<LiveMode />
+	{/if}
+</QueryClientProvider>

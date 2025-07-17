@@ -2,7 +2,19 @@
 	import { urlFor } from '$lib/sanity/image';
 	import { type Post } from '$lib/sanity/queries';
 
-	let { posts }: { posts: Post[] } = $props();
+	import { createQuery } from '@tanstack/svelte-query';
+	import { client } from '$lib/sanity/client';
+	import { featuredPostsQuery } from '$lib/sanity/queries';
+
+	const getFeaturedPosts = async () => {
+		const data = await client.fetch(featuredPostsQuery);
+		return data as Post[];
+	};
+
+	const posts = createQuery<Post[], Error>({
+		queryKey: ['featured-posts'],
+		queryFn: () => getFeaturedPosts()
+	});
 </script>
 
 <section
@@ -20,25 +32,34 @@
 		</p>
 	</div>
 	<div class="mt-10 flex flex-col items-start gap-10 md:flex-row md:gap-[var(--gap)] lg:mt-16">
-		{#each posts as post (post._id)}
-			<article class="flex w-full flex-1 flex-col gap-1">
-				<a href={`/journal/${post.slug.current}`}>
-					<div class="relative aspect-[5/3] flex-1 overflow-hidden">
-						<img
-							src={urlFor(post.mainImage).maxWidth(1840).url()}
-							alt=""
-							class="absolute left-0 top-0 size-full scale-105 object-cover duration-[0.4s] ease-[cubic-bezier(.16,1,.3,1)] will-change-transform hover:scale-100"
-							fetchpriority="high"
-							sizes="(min-width:1024px) 920px, (min-width:768px) 480px, 100vw"
-							srcset="
+		{#if $posts.status === 'pending'}
+			{#each [0, 1] as key (key)}
+				<article class="flex w-full flex-1 flex-col gap-1">
+					<div class="relative aspect-[5/3] flex-1 animate-pulse overflow-hidden bg-gray-700"></div>
+					<p class="mt-1 font-normal">Loading...</p>
+				</article>
+			{/each}
+		{:else if $posts.status === 'success'}
+			{#each $posts.data as post (post._id)}
+				<article class="flex w-full flex-1 flex-col gap-1">
+					<a href={`/journal/${post.slug.current}`}>
+						<div class="relative aspect-[5/3] flex-1 overflow-hidden">
+							<img
+								src={urlFor(post.mainImage).maxWidth(1840).url()}
+								alt=""
+								class="absolute left-0 top-0 size-full scale-105 object-cover duration-[0.4s] ease-[cubic-bezier(.16,1,.3,1)] will-change-transform hover:scale-100"
+								fetchpriority="high"
+								sizes="(min-width:1024px) 920px, (min-width:768px) 480px, 100vw"
+								srcset="
     								{urlFor(post.mainImage).width(480).url()} 480w,
     								{urlFor(post.mainImage).width(980).url()} 980w,
     								{urlFor(post.mainImage).width(1840).url()} 1840w"
-						/>
-					</div>
-					<p class="mt-1 font-normal">{post.title}</p>
-				</a>
-			</article>
-		{/each}
+							/>
+						</div>
+						<p class="mt-1 font-normal">{post.title}</p>
+					</a>
+				</article>
+			{/each}
+		{/if}
 	</div>
 </section>

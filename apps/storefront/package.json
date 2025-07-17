@@ -60,6 +60,7 @@
 		"@sanity/image-url": "^1.1.0",
 		"@sanity/svelte-loader": "^1.13.43",
 		"@sanity/visual-editing": "^2.15.2",
+		"@tanstack/svelte-query": "^5.83.0",
 		"embla-carousel": "^8.6.0",
 		"groq": "^3.99.0",
 		"gsap": "^3.13.0",
