@@ -35,7 +35,7 @@
 		: 'Explore our unique tile collection at Techno Ceram.';
 
 	const ogImageUrl = $product?.data?.image
-		? urlFor($product.data.image).width(1200).height(630).format('jpg').url()
+		? urlFor($product.data.image).width(1200).height(630).fit('clip').format('jpg').url()
 		: `${PUBLIC_SITE_URL}/og/home_og.jpg`;
 </script>
 

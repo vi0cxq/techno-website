@@ -1,3 +1,30 @@
+<script lang="ts">
+	import { PUBLIC_SITE_URL } from '$env/static/public';
+	import { MetaTags } from 'svelte-meta-tags';
+</script>
+
+<MetaTags
+	title="Contact Us"
+	titleTemplate="%s | Techno Ceram"
+	description="Get in touch with Techno Ceram for inquiries, support, or showroom visits. We’re here to help."
+	canonical={`${PUBLIC_SITE_URL}/contact`}
+	openGraph={{
+		title: 'Contact Us | Techno Ceram',
+		description:
+			'Get in touch with Techno Ceram for inquiries, support, or showroom visits. We’re here to help.',
+		url: `${PUBLIC_SITE_URL}/contact`,
+		type: 'website',
+		images: [
+			{
+				url: `${PUBLIC_SITE_URL}/og/home_og.jpg`,
+				width: 1200,
+				height: 630,
+				alt: 'Techno Ceram Contact'
+			}
+		]
+	}}
+/>
+
 <main>
 	<section class="flex min-h-screen flex-col md:flex-row">
 		<div

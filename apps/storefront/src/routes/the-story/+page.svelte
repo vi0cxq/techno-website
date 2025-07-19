@@ -1,7 +1,30 @@
 <script lang="ts">
-	import founderImg from '$lib/assets/images/jimmy.jpg';
-	import companyImg from '$lib/assets/images/company.webp';
+	import { MetaTags } from 'svelte-meta-tags';
+	import { PUBLIC_SITE_URL } from '$env/static/public';
+	import ParallaxImg from '$lib/components/parallax-img.svelte';
 </script>
+
+<MetaTags
+	title="Our Story"
+	titleTemplate="%s | Techno Ceram"
+	description="Learn about Techno Ceram’s journey, values, and commitment to quality craftsmanship in ceramic tile production."
+	canonical={`${PUBLIC_SITE_URL}/the-story`}
+	openGraph={{
+		title: 'Our Story | Techno Ceram',
+		description:
+			'Learn about Techno Ceram’s journey, values, and commitment to quality craftsmanship in ceramic tile production.',
+		url: `${PUBLIC_SITE_URL}/the-story`,
+		type: 'website',
+		images: [
+			{
+				url: `${PUBLIC_SITE_URL}/og/home_og.jpg`,
+				width: 1200,
+				height: 630,
+				alt: 'Techno Ceram – Our Story'
+			}
+		]
+	}}
+/>
 
 <main class="pt-[calc(var(--section-padding)*1.5)] lg:pt-[calc(var(--section-padding)*2)]">
 	<section class="px-[var(--container-padding)]">
@@ -39,14 +62,31 @@
 			</div>
 			<div class="hidden flex-[0.5] md:block xl:flex-1">
 				<div class="relative aspect-[5/6] size-full">
-					<img src={founderImg} alt="founder" srcset="" class="absolute size-full object-cover" />
+					<enhanced:img
+						src="/static/images/founder.webp?w=1400"
+						alt="techno ceram"
+						class="absolute size-full object-cover object-top"
+						fetchpriority="high"
+						sizes="(max-width: 1024px) 1400px"
+					/>
 				</div>
 			</div>
 		</div>
 	</section>
-	<div class="relative aspect-[5/6] w-full sm:aspect-[5/4] lg:aspect-video">
-		<img src={companyImg} alt="founder" srcset="" class="absolute size-full object-cover" />
-	</div>
+
+	<ParallaxImg
+		classname="relative aspect-[5/6] w-full sm:aspect-[5/4] lg:aspect-video overflow-hidden"
+		targetId="parallax"
+	>
+		<enhanced:img
+			src="/static/images/story_building.webp?w=2560;1536;850"
+			class="absolute left-0 top-[-5%] h-[100%] w-full object-cover will-change-transform"
+			sizes="min(2560px, 100vw)"
+			alt="techno ceram"
+			fetchpriority="high"
+		/>
+	</ParallaxImg>
+
 	<section
 		class="bg-background-3 text-foreground-2 px-[var(--container-padding)] py-[var(--section-padding)] lg:py-[calc(var(--section-padding)*1.5)]"
 	>
@@ -62,7 +102,7 @@
 			</p>
 		</div>
 
-		<div class="grid grid-cols-1 [grid-template-rows:auto_1fr] gap-x-8 gap-y-4 sm:grid-cols-2">
+		<div class="grid grid-cols-1 gap-x-8 gap-y-4 [grid-template-rows:auto_1fr] sm:grid-cols-2">
 			<div class="border-foreground-2/30 flex flex-col gap-16 border-t py-8 md:gap-24">
 				<p class="text-foreground-2/60 text-base uppercase">countries served</p>
 				<p class="text-5xl font-medium">25+</p>
