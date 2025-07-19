@@ -46,7 +46,7 @@
 		},
 		{
 			title: 'Featured',
-			href: '/collections/featured',
+			href: '/collections/featured-tiles',
 			image: featImg
 		},
 		{

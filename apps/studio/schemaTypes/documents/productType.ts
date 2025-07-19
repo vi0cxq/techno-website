@@ -1,6 +1,5 @@
 import {defineType, defineField, defineArrayMember} from 'sanity'
-import {BasketIcon, ControlsIcon, TagIcon} from '@sanity/icons'
-import {GenerateVariants} from './GenerateVariants'
+import {BasketIcon} from '@sanity/icons'
 
 export const productType = defineType({
   name: 'product',
@@ -49,12 +48,12 @@ export const productType = defineType({
       type: 'array',
       of: [{type: 'block'}],
     }),
-    defineField({
-      name: 'category',
-      title: 'Categories',
-      type: 'array',
-      of: [{type: 'reference', to: {type: 'category'}}],
-    }),
+    // defineField({
+    //   name: 'category',
+    //   title: 'Categories',
+    //   type: 'array',
+    //   of: [{type: 'reference', to: {type: 'category'}}],
+    // }),
     defineField({
       name: 'collections',
       title: 'Collections',
@@ -106,167 +105,174 @@ export const productType = defineType({
       validation: (Rule) => Rule.min(0),
     }),
 
-    defineField({
-      name: 'options',
-      title: 'Options',
-      type: 'array',
-      group: 'product',
-      of: [
-        defineArrayMember({
-          name: 'option',
-          title: 'Option',
-          type: 'object',
-          fields: [
-            defineField({
-              name: 'name',
-              description: 'Size, color, etc.',
-              title: 'Option Name',
-              type: 'string',
-            }),
-            defineField({
-              name: 'values',
-              title: 'Option Values',
-              type: 'array',
-              of: [
-                defineArrayMember({
-                  name: 'value',
-                  title: 'Value',
-                  type: 'string',
-                }),
-              ],
-            }),
-          ],
-          preview: {
-            select: {
-              title: 'name',
-              subtitle: 'values',
-            },
-            prepare(selection) {
-              const {title, subtitle} = selection
-              // Join the values array into a comma-separated string
-              const valuesString = Array.isArray(subtitle) ? subtitle.join(', ') : ''
-              return {
-                title: title,
-                subtitle: valuesString,
-                icon: ControlsIcon,
-              }
-            },
-          },
-        }),
-      ],
-    }),
-    defineField({
-      name: 'variants',
-      title: 'Variants',
-      group: 'product',
-      type: 'array',
-      components: {input: GenerateVariants},
-      of: [
-        defineArrayMember({
-          name: 'variant',
-          title: 'Variant',
-          type: 'object',
-          fields: [
-            defineField({
-              name: 'variantName',
-              title: 'Variant Name',
-              type: 'string',
-            }),
-            defineField({
-              name: 'options',
-              title: 'Variant Options',
-              description:
-                'Avoid editing these directly. They are generated from the product options. If you need to change them, edit the product options instead and generate a new set.',
-              type: 'array',
-              of: [
-                defineArrayMember({
-                  name: 'option',
-                  title: 'Option',
-                  type: 'object',
-                  fields: [
-                    defineField({
-                      name: 'name',
-                      title: 'Name',
-                      type: 'string',
-                    }),
-                    defineField({
-                      name: 'value',
-                      title: 'Value',
-                      type: 'string',
-                    }),
-                  ],
-                  preview: {
-                    select: {
-                      title: 'name',
-                      subtitle: 'value',
-                    },
-                    prepare(selection) {
-                      const {title, subtitle} = selection
-                      return {
-                        title: `${title}: ${subtitle}`,
-                        icon: ControlsIcon,
-                      }
-                    },
-                  },
-                }),
-              ],
-            }),
-            defineField({
-              name: 'variantImages',
-              title: 'Image Gallery',
-              type: 'array',
-              options: {
-                layout: 'grid',
-              },
-              of: [
-                defineArrayMember({
-                  name: 'image',
-                  title: 'Images',
-                  type: 'image',
-                  options: {
-                    hotspot: true,
-                  },
-                }),
-              ],
-            }),
-            defineField({
-              name: 'quantity',
-              title: 'Stock',
-              description: 'Set the quantity of available stock for this variant',
-              type: 'number',
-              initialValue: 0,
-            }),
-          ],
-          preview: {
-            select: {
-              title: 'variantName',
-              subtitle: 'quantity',
-              images: 'variantImages',
-            },
-            prepare(selection) {
-              const {title, subtitle, images} = selection
+    // defineField({
+    //   name: 'options',
+    //   title: 'Options',
+    //   type: 'array',
+    //   group: 'product',
+    //   of: [
+    //     defineArrayMember({
+    //       name: 'option',
+    //       title: 'Option',
+    //       type: 'object',
+    //       fields: [
+    //         defineField({
+    //           name: 'name',
+    //           description: 'Size, color, etc.',
+    //           title: 'Option Name',
+    //           type: 'string',
+    //         }),
+    //         defineField({
+    //           name: 'values',
+    //           title: 'Option Values',
+    //           type: 'array',
+    //           of: [
+    //             defineArrayMember({
+    //               name: 'value',
+    //               title: 'Value',
+    //               type: 'string',
+    //             }),
+    //           ],
+    //         }),
+    //       ],
+    //       preview: {
+    //         select: {
+    //           title: 'name',
+    //           subtitle: 'values',
+    //         },
+    //         prepare(selection) {
+    //           const {title, subtitle} = selection
+    //           // Join the values array into a comma-separated string
+    //           const valuesString = Array.isArray(subtitle) ? subtitle.join(', ') : ''
+    //           return {
+    //             title: title,
+    //             subtitle: valuesString,
+    //             icon: ControlsIcon,
+    //           }
+    //         },
+    //       },
+    //     }),
+    //   ],
+    // }),
+    // defineField({
+    //   name: 'variants',
+    //   title: 'Variants',
+    //   group: 'product',
+    //   type: 'array',
+    //   components: {input: GenerateVariants},
+    //   of: [
+    //     defineArrayMember({
+    //       name: 'variant',
+    //       title: 'Variant',
+    //       type: 'object',
+    //       fields: [
+    //         defineField({
+    //           name: 'variantName',
+    //           title: 'Variant Name',
+    //           type: 'string',
+    //         }),
+    //         defineField({
+    //           name: 'options',
+    //           title: 'Variant Options',
+    //           description:
+    //             'Avoid editing these directly. They are generated from the product options. If you need to change them, edit the product options instead and generate a new set.',
+    //           type: 'array',
+    //           of: [
+    //             defineArrayMember({
+    //               name: 'option',
+    //               title: 'Option',
+    //               type: 'object',
+    //               fields: [
+    //                 defineField({
+    //                   name: 'name',
+    //                   title: 'Name',
+    //                   type: 'string',
+    //                 }),
+    //                 defineField({
+    //                   name: 'value',
+    //                   title: 'Value',
+    //                   type: 'string',
+    //                 }),
+    //               ],
+    //               preview: {
+    //                 select: {
+    //                   title: 'name',
+    //                   subtitle: 'value',
+    //                 },
+    //                 prepare(selection) {
+    //                   const {title, subtitle} = selection
+    //                   return {
+    //                     title: `${title}: ${subtitle}`,
+    //                     icon: ControlsIcon,
+    //                   }
+    //                 },
+    //               },
+    //             }),
+    //           ],
+    //         }),
+    //         defineField({
+    //           name: 'variantImages',
+    //           title: 'Image Gallery',
+    //           type: 'array',
+    //           options: {
+    //             layout: 'grid',
+    //           },
+    //           of: [
+    //             defineArrayMember({
+    //               name: 'image',
+    //               title: 'Images',
+    //               type: 'image',
+    //               options: {
+    //                 hotspot: true,
+    //               },
+    //             }),
+    //           ],
+    //         }),
+    //         defineField({
+    //           name: 'quantity',
+    //           title: 'Stock',
+    //           description: 'Set the quantity of available stock for this variant',
+    //           type: 'number',
+    //           initialValue: 0,
+    //         }),
+    //       ],
+    //       preview: {
+    //         select: {
+    //           title: 'variantName',
+    //           subtitle: 'quantity',
+    //           images: 'variantImages',
+    //         },
+    //         prepare(selection) {
+    //           const {title, subtitle, images} = selection
 
-              const image = Array.isArray(images) ? images.find((img) => img?.asset) : undefined
+    //           const image = Array.isArray(images) ? images.find((img) => img?.asset) : undefined
 
-              const stockTitle = subtitle !== null ? `Stock: ${subtitle}` : 'No stock info'
-              const imageTitle =
-                Array.isArray(images) && images.length ? `Images: ${images.length}` : 'No Images'
+    //           const stockTitle = subtitle !== null ? `Stock: ${subtitle}` : 'No stock info'
+    //           const imageTitle =
+    //             Array.isArray(images) && images.length ? `Images: ${images.length}` : 'No Images'
 
-              return {
-                title: title,
-                subtitle: `${stockTitle} | ${imageTitle}`,
-                media: image ?? TagIcon,
-              }
-            },
-          },
-        }),
-      ],
-    }),
+    //           return {
+    //             title: title,
+    //             subtitle: `${stockTitle} | ${imageTitle}`,
+    //             media: image ?? TagIcon,
+    //           }
+    //         },
+    //       },
+    //     }),
+    //   ],
+    // }),
     defineField({
       name: 'details',
       title: 'Details',
       type: 'productDetails',
       group: 'details',
+    }),
+    defineField({
+      name: 'relatedProducts',
+      title: 'Related Tiles',
+      type: 'array',
+      of: [{type: 'reference', to: [{type: 'product'}]}],
+      validation: (rule) => rule.required(),
     }),
   ],
 })

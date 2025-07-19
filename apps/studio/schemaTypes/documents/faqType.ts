@@ -18,11 +18,11 @@ export const faqType = defineType({
       of: [{type: 'block'}],
     }),
     defineField({
-      name: 'relatedCategories',
+      name: 'relatedCollections',
       type: 'array',
-      title: 'Related Categories',
-      of: [{type: 'reference', to: [{type: 'category'}]}],
-      description: 'Assign this FAQ to one or more product categories.',
+      title: 'Related Collections',
+      of: [{type: 'reference', to: [{type: 'collection'}]}],
+      description: 'Assign this FAQ to one or more product Collections.',
     }),
   ],
 })

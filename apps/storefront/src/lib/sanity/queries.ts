@@ -54,10 +54,11 @@ export type Showroom = {
 	alt: string;
 };
 
-export const tilesQuery = groq`*[
-	_type == "product" 
-	&& (!defined($collection) || $collection in collections[]->slug.current) 
-] | order(_createdAt desc)`;
+export const productsQuery = groq`*[
+  _type == "product"
+  && (!defined($collection) || $collection in collections[]->slug.current)
+]
+| order(_createdAt desc)`;
 
 export const featuredProductsQuery = groq`*[_type == "product" && "featured-tiles" in collections[]->slug.current] | order(_createdAt desc) {
 	_id,
@@ -74,4 +75,37 @@ export type Product = {
 	image: ImageAsset;
 	imageGallery: ImageAsset[];
 	_createdAt: string;
+};
+
+export const collectionQuery = groq`*[_type == "collection" && slug.current == $slug][0]{
+	_id,
+	slug,
+	name,
+	description,
+	image,
+	handpickedProducts[]->{
+    _id,
+    name,
+    slug,
+    image
+  }
+}`;
+
+export type Collection = {
+	_id: string;
+	slug: Slug;
+	name: string;
+	description: string;
+	image: ImageAsset;
+	handpickedProducts: Product[];
+};
+
+export const faqQuery = groq`*[_type == "faq" && $collectionId in relatedCollections[]._ref]{
+  question,
+  answer
+}`;
+
+export type Faq = {
+	answer: PortableTextBlock[];
+	question: string;
 };

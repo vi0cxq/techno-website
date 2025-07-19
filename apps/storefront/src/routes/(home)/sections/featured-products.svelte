@@ -92,14 +92,16 @@
 								<a href={`/products/${product.slug.current}`}>
 									<div class="relative aspect-[4/5] w-full overflow-hidden">
 										<img
-											src={urlFor(product.image).maxWidth(1200).format('webp').quality(80).url()}
+											src={urlFor(product.image).width(920).format('webp').url()}
 											alt=""
 											class="absolute left-0 top-0 size-full scale-105 object-cover duration-[0.4s] ease-[cubic-bezier(.16,1,.3,1)] will-change-transform hover:scale-100"
-											sizes="(min-width:768px) 360px, 100vw"
-											srcset="
-												{urlFor(product.image).width(470).format('webp').url()} 470w,
-												{urlFor(product.image).width(1080).format('webp').url()} 1080w,
-												"
+											srcset={[
+												`${urlFor(product.image).width(320).format('webp').url()} 320w`,
+												`${urlFor(product.image).width(640).format('webp').url()} 640w`,
+												`${urlFor(product.image).width(768).format('webp').url()} 768w`,
+												`${urlFor(product.image).width(900).format('webp').url()} 900w`
+											].join(', ')}
+											sizes="(max-width: 640px) 320px, (max-width: 768px) 640px, (max-width: 1024px) 768px, 465px"
 										/>
 									</div>
 

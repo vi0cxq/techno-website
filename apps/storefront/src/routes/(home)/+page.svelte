@@ -34,7 +34,7 @@
 
 <header class="relative flex min-h-svh items-end px-2 pb-4 md:p-[var(--container-padding)]">
 	<enhanced:img
-		src="/static/images/ceram.webp?w=1920"
+		src="/static/images/ceram.webp?w=1920;1600;1200;800;400"
 		alt="techno ceram"
 		style="position: absolute; width: 100%; height: 100%; object-fit: cover; top: 0; left: 0;"
 		fetchpriority="high"

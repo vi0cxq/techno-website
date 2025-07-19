@@ -31,6 +31,13 @@ export const collectionType = defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
+      name: 'handpickedProducts',
+      title: 'Handpicked Tiles',
+      type: 'array',
+      of: [{type: 'reference', to: [{type: 'product'}]}],
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
       name: 'publishedAt',
       type: 'datetime',
       initialValue: () => new Date().toISOString(),

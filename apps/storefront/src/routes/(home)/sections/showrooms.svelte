@@ -47,14 +47,19 @@
 							style="padding-top: {100 / showroom.aspect_ratio}%;"
 						>
 							<img
-								src={urlFor(showroom.image).maxWidth(1840).format('webp').url()}
+								src={urlFor(showroom.image).width(1280).format('webp').url()}
 								alt=""
 								class="absolute left-0 top-0 size-full scale-105 object-cover duration-[0.4s] ease-[cubic-bezier(.16,1,.3,1)] will-change-transform hover:scale-100"
-								sizes="(min-width:1024px) 920px, (min-width:768px) 480px, 100vw"
-								srcset="
-    								{urlFor(showroom.image).width(480).url()} 480w,
-    								{urlFor(showroom.image).width(980).url()} 980w,
-    								{urlFor(showroom.image).width(1840).url()} 1840w"
+								fetchpriority="high"
+								srcset={[
+									`${urlFor(showroom.image).width(320).url()} 320w`,
+									`${urlFor(showroom.image).width(640).url()} 640w`,
+									`${urlFor(showroom.image).width(768).url()} 768w`,
+									`${urlFor(showroom.image).width(900).url()} 900w`,
+									`${urlFor(showroom.image).width(1024).url()} 1024w`,
+									`${urlFor(showroom.image).width(1280).url()} 1280w`
+								].join(', ')}
+								sizes="(max-width: 640px) 320px, (max-width: 768px) 640px, (max-width: 1024px) 768px, (max-width: 1280px) 1024px, 950px"
 							/>
 						</div>
 

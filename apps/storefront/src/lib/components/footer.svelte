@@ -92,7 +92,7 @@
 	<div class="h-[45vh] w-full">
 		<div class="relative size-full">
 			<enhanced:img
-				src="/static/images/footer.webp?w=1920"
+				src="/static/images/footer.webp?w=1920;1600;1200;800;400"
 				alt="techno ceram"
 				sizes="min(1920px, 100vw)"
 				class="absolute left-0 top-0 size-full object-cover object-bottom"
