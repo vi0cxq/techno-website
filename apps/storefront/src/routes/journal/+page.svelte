@@ -3,6 +3,8 @@
 
 	import type { PageData } from './$types';
 	import { urlFor } from '$lib/sanity/image';
+	import { MetaTags } from 'svelte-meta-tags';
+	import { PUBLIC_SITE_URL } from '$env/static/public';
 
 	let { data }: { data: PageData } = $props();
 
@@ -10,6 +12,28 @@
 		return useQuery(data);
 	});
 </script>
+
+<MetaTags
+	title="Journal"
+	titleTemplate="%s | Techno Ceram"
+	description="Insights, inspirations, and updates from the world of ceramic tile design and innovation."
+	canonical={`${PUBLIC_SITE_URL}/journal`}
+	openGraph={{
+		title: 'Journal | Techno Ceram',
+		description:
+			'Insights, inspirations, and updates from the world of ceramic tile design and innovation.',
+		url: `${PUBLIC_SITE_URL}/journal`,
+		type: 'website',
+		images: [
+			{
+				url: `${PUBLIC_SITE_URL}/og/home_og.jpg`,
+				width: 1200,
+				height: 630,
+				alt: 'Techno Ceram Journal'
+			}
+		]
+	}}
+/>
 
 <main class="px-[var(--container-padding)] py-[var(--section-padding)]">
 	<div class="border-foreground/30 border-b pb-4">
