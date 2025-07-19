@@ -67,14 +67,92 @@ export const featuredProductsQuery = groq`*[_type == "product" && "featured-tile
     image,
   }`;
 
+export const productQuery = groq`*[_type == "product" && slug.current == $slug][0]{
+  _id,
+  name,
+  slug,
+  image,
+  imageGallery,
+  description,
+  details {
+    material->{
+      _id,
+      name
+    },
+    color->{
+      _id,
+      name
+    },
+    shape->{
+      _id,
+      name
+    },
+    dimensions,
+    thickness,
+    tilesPerSqMetre,
+    tilesPerBox,
+    coveragePerBox,
+    finish,
+    texture,
+    wallOrFloorTile,
+    area,
+    glazed,
+    requiresSealing,
+    frostProof,
+    rectifiedEdge,
+	antiSlipRating,
+    fireHearthsSurround,
+    trimSize
+  },
+  collections[]->{
+    _id,
+    title
+  },
+  relatedProducts[]->{
+    _id,
+    name,
+    slug,
+    image
+  }
+}`;
+
+export type Ref = {
+	_id: string;
+	name: string;
+};
+
+export type Details = {
+	material: Ref;
+	shape: Ref;
+	dimensions: string;
+	thickness: string;
+	tilesPerSqMetre: string;
+	tilesPerBox: string;
+	coveragePerBox: string;
+	color: Ref;
+	finish: string;
+	texture: string;
+	wallOrFloorTile: 'Wall' | 'Floor' | 'Both';
+	area: string;
+	glazed: boolean;
+	antiSlipRating: string;
+	requiresSealing: boolean;
+	frostProof: boolean;
+	rectifiedEdge: boolean;
+	fireHearthsSurround: boolean;
+	trimSize: string;
+};
+
 export type Product = {
 	_id: string;
 	slug: Slug;
 	name: string;
 	description: PortableTextBlock[];
+	details: Details;
 	image: ImageAsset;
 	imageGallery: ImageAsset[];
 	_createdAt: string;
+	relatedProducts: Product[];
 };
 
 export const collectionQuery = groq`*[_type == "collection" && slug.current == $slug][0]{

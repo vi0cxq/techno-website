@@ -29,7 +29,7 @@
 		})
 	);
 
-	const title = $collection.data ? $collection.data.name : 'Tile Collections';
+	const title = $collection.data ? $collection.data.name : 'Not Found';
 	const description = $collection.data
 		? $collection.data.description
 		: 'Explore our diverse ceramic tile collections, from classic to avant-garde styles, crafted for modern living.';
@@ -39,7 +39,7 @@
 	{title}
 	titleTemplate="%s | Techno Ceram"
 	{description}
-	canonical={`${PUBLIC_SITE_URL}/collection`}
+	canonical={`${PUBLIC_SITE_URL}/collection/${page.params.slug}`}
 	openGraph={{
 		title,
 		description,
@@ -77,13 +77,20 @@
 					alt={$collection.data.name}
 					class="absolute left-0 top-0 size-full object-cover"
 					fetchpriority="high"
-					sizes="min(1920px, 100vw)"
-					srcset="
-						{urlFor($collection.data.image).width(400).url()} 400w,
-						{urlFor($collection.data.image).width(800).url()} 800w,
-						{urlFor($collection.data.image).width(1200).url()} 1200w,
-						{urlFor($collection.data.image).width(1600).url()} 1600w,
-						{urlFor($collection.data.image).width(1920).url()} 1920w"
+					srcset={[
+						`${urlFor($collection.data.image).width(320).format('webp').url()} 320w`,
+						`${urlFor($collection.data.image).width(640).format('webp').url()} 640w`,
+						`${urlFor($collection.data.image).width(768).format('webp').url()} 768w`,
+						`${urlFor($collection.data.image).width(1024).format('webp').url()} 1024w`,
+						`${urlFor($collection.data.image).width(1366).format('webp').url()} 1366w`,
+						`${urlFor($collection.data.image).width(1600).format('webp').url()} 1600w`,
+						`${urlFor($collection.data.image).width(1920).format('webp').url()} 1920w`
+					].join(', ')}
+					sizes="(max-width: 640px) 100vw, 
+						(max-width: 768px) 100vw, 
+						(max-width: 1024px) 100vw, 
+						(max-width: 1440px) 90vw, 
+						95vw"
 				/>
 			</div>
 		</div>
@@ -116,7 +123,7 @@
 			{:else if $products.status === 'success'}
 				{#each $products.data as product (product._id)}
 					<article>
-						<a href="/">
+						<a href={`/products/${product.slug.current}`}>
 							<div class="relative aspect-[4/5] w-full overflow-hidden">
 								<img
 									src={urlFor(product.image).width(920).format('webp').url()}
@@ -156,7 +163,7 @@
 				<div class="grid grid-cols-1 gap-8 px-[var(--container-padding)] sm:grid-cols-2 md:gap-8">
 					{#each $collection.data.handpickedProducts as product (product.slug.current)}
 						<article>
-							<a href="/">
+							<a href={`/products/${product.slug.current}`}>
 								<div class="relative aspect-[4/5] w-full overflow-hidden">
 									<img
 										src={urlFor(product.image).width(1280).format('webp').url()}

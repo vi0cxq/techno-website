@@ -1,4 +1,4 @@
-import { collectionQuery, type Collection } from '$lib/sanity/queries';
+import { productQuery, type Product } from '$lib/sanity/queries';
 import { error } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 
@@ -7,14 +7,14 @@ export const load: PageServerLoad = async (event) => {
 
 	const { slug } = event.params;
 
-	const initial = await loadQuery<Collection>(collectionQuery, { slug });
+	const initial = await loadQuery<Product>(productQuery, { slug });
 
 	if (!initial) {
-		throw error(404, 'Collection not found');
+		throw error(404, 'Product not found');
 	}
 
 	return {
-		query: collectionQuery,
+		query: productQuery,
 		options: { initial },
 		params: {
 			slug

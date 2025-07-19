@@ -13,11 +13,12 @@ export const productDetailsType = defineField({
       to: [{type: 'material'}],
     }),
     defineField({
-      name: 'size',
-      title: 'Size',
-      description: 'The primary material the tile is made from (e.g., ceramic, porcelain).',
+      name: 'shape',
+      title: 'Shape',
+      description:
+        'Overall geometric form of the tile, used for layout and design filtering (e.g., square, hexagon, subway).',
       type: 'reference',
-      to: [{type: 'size'}],
+      to: [{type: 'shape'}],
     }),
     defineField({
       name: 'dimensions',
@@ -69,12 +70,28 @@ export const productDetailsType = defineField({
       description: 'Physical surface feel or pattern (e.g., rippled, smooth).',
     }),
     defineField({
+      name: 'antiSlipRating',
+      title: 'Anti-Slip Rating',
+      type: 'string',
+      options: {
+        list: [
+          {title: 'Smooth (Not Anti-Slip)', value: 'Smooth'},
+          {title: 'Textured', value: 'Textured'},
+          {title: 'R9 - Low', value: 'R9'},
+          {title: 'R10 - Medium', value: 'R10'},
+          {title: 'R11 - High', value: 'R11'},
+          {title: 'R12 - Very High', value: 'R12'},
+        ],
+      },
+      description: 'Select the tile’s anti-slip level based on surface texture or rating standard.',
+    }),
+    defineField({
       name: 'wallOrFloorTile',
       type: 'string',
       title: 'Wall or floor tile',
       description: 'Specifies if the tile is meant for walls, floors, or both.',
       options: {
-        list: ['Wall Tile', 'Floor Tile', 'Both'],
+        list: ['Wall', 'Floor', 'Both'],
       },
     }),
     defineField({
