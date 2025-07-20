@@ -12,10 +12,10 @@
 	import Footer from '$lib/components/footer.svelte';
 	import Navigation from '$lib/components/navigation.svelte';
 
+	import { MediaQuery } from 'svelte/reactivity';
 	import type { Attachment } from 'svelte/attachments';
 	import { isFirstLoad } from '$lib/stores/navigation.svelte';
 	import '../app.css';
-	import { MediaQuery } from 'svelte/reactivity';
 
 	let { children, data }: { children: Snippet; data: { url: string } } = $props();
 	const desktop = new MediaQuery('min-width: 1024px');
@@ -39,7 +39,7 @@
 
 		const observer = new ResizeObserver(() => {
 			ScrollTrigger.refresh();
-			console.log('Resize->>>>');
+			// console.log('Resize->>>>');
 		});
 
 		observer.observe(document.body);
@@ -59,25 +59,25 @@
 
 	const transition: Attachment = (element) => {
 		if (isFirstLoad()) {
-			console.log('SKIP: First load');
+			// console.log('SKIP: First load');
 			return;
 		}
 
-		console.log('RUN: Internal nav');
+		// console.log('RUN: Internal nav');
 
 		const tl = gsap.timeline();
 
 		tl.to(element, {
 			clipPath: 'inset(0% 0% 0% 0%)',
-			duration: desktop ? 1 : 1.4,
+			duration: desktop.current ? 1.3 : 1.6,
 			ease: 'expo.out'
 		});
 
 		tl.to(element, {
-			clipPath: 'inset(0% 0% 100% 0%)',
-			duration: desktop ? 1 : 1.4,
+			clipPath: 'inset(0% 0% 110% 0%)',
+			duration: desktop.current ? 1.3 : 1.6,
 			ease: 'expo.out',
-			delay: 0.3
+			delay: desktop.current ? 0.3 : 0.4
 		});
 
 		return () => {};
@@ -107,8 +107,8 @@
 			</p>
 		</div>
 		<div
-			class="bg-background relative z-10 mb-[100vh] flex min-h-screen flex-col overflow-hidden"
-			out:fade={{ duration: desktop ? 1200 : 1300 }}
+			class="bg-background relative z-10 mb-[100vh] flex min-h-screen flex-col"
+			out:fade={{ duration: desktop.current ? 1200 : 1300 }}
 		>
 			{@render children()}
 		</div>
@@ -117,38 +117,14 @@
 </QueryClientProvider>
 
 <style>
-	/* :global {
-		html.lenis,
-		html.lenis body {
-			height: auto;
-		}
-
-		.lenis:not(.lenis-autoToggle) {
-			overflow: clip;
-		}
-
-		.lenis.lenis-smooth [data-lenis-prevent] {
-			overscroll-behavior: contain;
-		}
-
-		.lenis.lenis-smooth iframe {
-			pointer-events: none;
-		}
-
-		.lenis.lenis-autoToggle {
-			transition-property: overflow;
-			transition-duration: 1ms;
-			transition-behavior: allow-discrete;
-		}
-	} */
 	.wrapper {
 		position: fixed;
 		bottom: 0;
 		left: 0;
 		width: 100%;
-		height: 100vh;
+		height: 100svh;
 		background: oklch(0.2191 0.0058 285.91);
-		clip-path: inset(100% 0% 0% 0%); /* fully hidden */
+		clip-path: inset(110% 0% 0% 0%);
 		z-index: 100000;
 		overflow: hidden;
 		display: flex;
