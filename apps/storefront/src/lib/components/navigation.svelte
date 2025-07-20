@@ -31,6 +31,7 @@
 	import bathroomImg from '$lib/assets/images/collections/bathroom.webp?enhanced';
 	import outdoorImg from '$lib/assets/images/collections/outdoor.webp?enhanced';
 	import kitchenImg from '$lib/assets/images/collections/kitchen.webp?enhanced';
+	import { beforeNavigate } from '$app/navigation';
 
 	let navigation_data = [
 		{
@@ -201,6 +202,10 @@
 	const collectionAnimation = createCollectionAnimation();
 	const menuAnimation = createMenuAnimation();
 	const navAnimation = createNavAnimation();
+
+	beforeNavigate(() => {
+		collectionAnimation?.reverse();
+	});
 </script>
 
 <nav
@@ -221,7 +226,9 @@
 	>
 		<li
 			onmouseenter={() => collectionAnimation.play()}
-			onmouseleave={() => collectionAnimation.reverse()}
+			onmouseleave={() => {
+				collectionAnimation.reverse();
+			}}
 		>
 			<p class="group relative cursor-pointer overflow-hidden tracking-wider">
 				<span

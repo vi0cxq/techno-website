@@ -15,8 +15,10 @@
 	import type { Attachment } from 'svelte/attachments';
 	import { isFirstLoad } from '$lib/stores/navigation.svelte';
 	import '../app.css';
+	import { MediaQuery } from 'svelte/reactivity';
 
 	let { children, data }: { children: Snippet; data: { url: string } } = $props();
+	const desktop = new MediaQuery('min-width: 1024px');
 
 	let lenis: Lenis;
 
@@ -26,7 +28,7 @@
 		setContext<Lenis>('lenis', lenis);
 	}
 
-	$effect(() => {
+	onMount(() => {
 		lenis.on('scroll', ScrollTrigger.update);
 
 		gsap.ticker.add((time) => {
@@ -34,6 +36,17 @@
 		});
 
 		gsap.ticker.lagSmoothing(0);
+
+		const observer = new ResizeObserver(() => {
+			ScrollTrigger.refresh();
+			console.log('Resize->>>>');
+		});
+
+		observer.observe(document.body);
+
+		return () => {
+			observer.disconnect();
+		};
 	});
 
 	const queryClient = new QueryClient({
@@ -55,17 +68,16 @@
 		const tl = gsap.timeline();
 
 		tl.to(element, {
-			height: '100vh',
-			duration: 0.8,
-			ease: 'power4.out'
+			clipPath: 'inset(0% 0% 0% 0%)',
+			duration: desktop ? 1 : 1.4,
+			ease: 'expo.out'
 		});
 
 		tl.to(element, {
-			y: '-100vh',
-			height: 0,
-			duration: 0.8,
-			ease: 'expo.in',
-			delay: 0.2
+			clipPath: 'inset(0% 0% 100% 0%)',
+			duration: desktop ? 1 : 1.4,
+			ease: 'expo.out',
+			delay: 0.3
 		});
 
 		return () => {};
@@ -83,35 +95,20 @@
 			delay
 		};
 	}
-
-	onMount(() => {
-		let lastHeight = document.body.offsetHeight;
-
-		const observer = new ResizeObserver(() => {
-			const newHeight = document.body.offsetHeight;
-			if (newHeight !== lastHeight) {
-				lastHeight = newHeight;
-				console.log('📏 Body height changed, refreshing ScrollTrigger');
-				ScrollTrigger.refresh();
-			}
-		});
-
-		observer.observe(document.body);
-
-		return () => {
-			observer.disconnect();
-		};
-	});
 </script>
 
 <QueryClientProvider client={queryClient}>
 	{#key data.url}
 		<Navigation />
 
-		<div class="wrapper" {@attach transition}></div>
+		<div class="wrapper" {@attach transition}>
+			<p class="text-foreground-2 text-base uppercase">
+				Techno <span>Ceram</span>
+			</p>
+		</div>
 		<div
 			class="bg-background relative z-10 mb-[100vh] flex min-h-screen flex-col overflow-hidden"
-			out:fade={{ duration: 1200 }}
+			out:fade={{ duration: desktop ? 1200 : 1300 }}
 		>
 			{@render children()}
 		</div>
@@ -120,13 +117,13 @@
 </QueryClientProvider>
 
 <style>
-	:global {
+	/* :global {
 		html.lenis,
 		html.lenis body {
 			height: auto;
 		}
 
-		.lenis:not(.lenis-autoToggle).lenis-stopped {
+		.lenis:not(.lenis-autoToggle) {
 			overflow: clip;
 		}
 
@@ -143,14 +140,19 @@
 			transition-duration: 1ms;
 			transition-behavior: allow-discrete;
 		}
-	}
+	} */
 	.wrapper {
-		background-color: oklch(0.2191 0.0058 285.91);
 		position: fixed;
 		bottom: 0;
 		left: 0;
 		width: 100%;
-		height: 0;
+		height: 100vh;
+		background: oklch(0.2191 0.0058 285.91);
+		clip-path: inset(100% 0% 0% 0%); /* fully hidden */
 		z-index: 100000;
+		overflow: hidden;
+		display: flex;
+		align-items: center;
+		justify-content: center;
 	}
 </style>
