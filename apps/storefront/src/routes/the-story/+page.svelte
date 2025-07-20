@@ -76,11 +76,11 @@
 
 	<ParallaxImg
 		classname="relative aspect-[5/6] w-full sm:aspect-[5/4] lg:aspect-video overflow-hidden"
-		targetId="parallax"
+		targetId="parallax-3"
 	>
 		<enhanced:img
 			src="/static/images/story_building.webp?w=2560;1536;850"
-			class="absolute left-0 top-[-5%] h-[100%] w-full object-cover will-change-transform"
+			class="absolute left-0 top-[-5%] h-[115%] w-full object-cover will-change-transform"
 			sizes="min(2560px, 100vw)"
 			alt="techno ceram"
 			fetchpriority="high"

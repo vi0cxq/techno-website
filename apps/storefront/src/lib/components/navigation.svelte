@@ -11,7 +11,6 @@
 
 	import logo from '$lib/assets/svg/techno-ceram-logo.svg';
 	import { page } from '$app/state';
-	import { beforeNavigate } from '$app/navigation';
 
 	const lenis = getContext<Lenis>('lenis');
 
@@ -202,11 +201,6 @@
 	const collectionAnimation = createCollectionAnimation();
 	const menuAnimation = createMenuAnimation();
 	const navAnimation = createNavAnimation();
-
-	beforeNavigate(() => {
-		collectionAnimation.reverse();
-		menuAnimation.reverse();
-	});
 </script>
 
 <nav
@@ -306,7 +300,7 @@
 		</li>
 	</ul>
 	<button
-		class="font-ivy bg-background-3 text-foreground-2 cursor-pointer rounded-full px-3 py-1 text-base lg:hidden"
+		class="cursor-pointer rounded-full px-3 py-1 text-base underline lg:hidden"
 		onclick={() => {
 			menuAnimation.toggle();
 		}}
@@ -316,7 +310,7 @@
 </nav>
 
 <div
-	class="bg-background-3 text-foreground-2 fixed left-0 top-0 z-50 min-h-screen w-0 overflow-hidden lg:hidden"
+	class="bg-background text-foreground fixed left-0 top-0 z-50 min-h-screen w-0 overflow-hidden lg:hidden"
 	{@attach menuAnimation.to()}
 >
 	<div
@@ -326,7 +320,7 @@
 			<li class="menu_link invisible">
 				<a
 					href="/"
-					class="border-foreground-2/20 inline-block w-full border-b py-5 text-xl uppercase leading-[1.2cap]"
+					class="border-foreground/30 inline-block w-full border-b py-5 text-xl font-medium uppercase leading-[1.2cap]"
 				>
 					Home
 				</a>
@@ -335,13 +329,13 @@
 				<Accordion.Root type="single">
 					<Accordion.Item value="item-1">
 						<Accordion.Trigger
-							class="border-foreground-2/20 cursor-pointer items-center rounded-none border-b py-5 text-xl uppercase leading-[1.2cap]"
+							class="border-foreground/30 cursor-pointer items-center rounded-none border-b py-5 text-xl font-medium uppercase leading-[1.2cap]"
 						>
 							collections
 						</Accordion.Trigger>
 						<Accordion.Content class="grid grid-cols-1 gap-3 py-3 sm:grid-cols-2">
 							{#each navigation_data as tile (tile.title)}
-								<a href={`/collections/${tile.title}`} class="text-muted text-lg">
+								<a href={`${tile.href}`} class="text-lg text-gray-500">
 									{tile.title}
 								</a>
 							{/each}
@@ -352,7 +346,7 @@
 			<li class="menu_link invisible">
 				<a
 					href="/showrooms"
-					class="border-foreground-2/20 inline-block w-full border-b py-5 text-xl uppercase leading-[1.2cap]"
+					class="border-foreground/30 inline-block w-full border-b py-5 text-xl font-medium uppercase leading-[1.2cap]"
 				>
 					showrooms
 				</a>
@@ -360,7 +354,7 @@
 			<li class="menu_link invisible">
 				<a
 					href="/journal"
-					class="border-foreground-2/20 inline-block w-full border-b py-5 text-xl uppercase leading-[1.2cap]"
+					class="border-foreground/30 inline-block w-full border-b py-5 text-xl font-medium uppercase leading-[1.2cap]"
 				>
 					journal
 				</a>
@@ -368,7 +362,7 @@
 			<li class="menu_link invisible">
 				<a
 					href="/the-story"
-					class="border-foreground-2/20 inline-block w-full border-b py-5 text-xl uppercase leading-[1.2cap]"
+					class="border-foreground/30 inline-block w-full border-b py-5 text-xl font-medium uppercase leading-[1.2cap]"
 				>
 					the story
 				</a>
@@ -376,7 +370,7 @@
 			<li class="menu_link invisible">
 				<a
 					href="/contact"
-					class="border-foreground-2/20 inline-block w-full border-b py-5 text-xl uppercase leading-[1.2cap]"
+					class="border-foreground/30 inline-block w-full border-b py-5 text-xl font-medium uppercase leading-[1.2cap]"
 				>
 					contact
 				</a>

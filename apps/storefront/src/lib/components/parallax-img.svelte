@@ -27,7 +27,8 @@
 								trigger,
 								scrub: true,
 								start: 'top bottom',
-								end: 'bottom top'
+								end: 'bottom top',
+								invalidateOnRefresh: true
 								// markers: true
 							}
 						})
