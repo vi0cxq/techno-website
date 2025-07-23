@@ -96,7 +96,8 @@
 				alt="techno ceram"
 				sizes="min(1920px, 100vw)"
 				class="absolute left-0 top-0 size-full object-cover object-bottom"
-				fetchpriority="high"
+				fetchpriority="low"
+				loading="lazy"
 			/>
 		</div>
 	</div>
