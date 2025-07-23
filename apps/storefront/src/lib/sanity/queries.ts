@@ -153,6 +153,7 @@ export type Product = {
 	imageGallery: ImageAsset[];
 	_createdAt: string;
 	relatedProducts: Product[];
+	lastModified: string;
 };
 
 export const collectionQuery = groq`*[_type == "collection" && slug.current == $slug][0]{
@@ -176,6 +177,7 @@ export type Collection = {
 	description: string;
 	image: ImageAsset;
 	handpickedProducts: Product[];
+	lastModified: string;
 };
 
 export const faqQuery = groq`*[_type == "faq" && $collectionId in relatedCollections[]._ref]{
