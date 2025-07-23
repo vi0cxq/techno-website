@@ -11,6 +11,10 @@
 	import { PUBLIC_SITE_URL } from '$env/static/public';
 	import { page } from '$app/state';
 
+	import { gsap } from 'gsap';
+	import { SplitText } from 'gsap/SplitText';
+	import { onMount } from 'svelte';
+
 	let { data }: { data: PageData } = $props();
 
 	const collection = $derived.by(() => {
@@ -33,6 +37,49 @@
 	const description = $collection.data
 		? $collection.data.description
 		: 'Explore our diverse ceramic tile collections, from classic to avant-garde styles, crafted for modern living.';
+
+	import { getIsTransition } from '$lib/stores/transition.svelte';
+
+	let container = $state<HTMLElement>();
+
+	const delay = getIsTransition() === 'first' ? 0.2 : 1.4;
+
+	onMount(() => {
+		const ctx = gsap.context(() => {
+			gsap.set(['.s1', '.s2'], { autoAlpha: 1 });
+			let split: GSAPTween;
+
+			SplitText.create(['.s1', '.s2'], {
+				type: 'words,lines',
+				linesClass: 'line',
+				autoSplit: true,
+				mask: 'lines',
+				onSplit: (self) => {
+					split = gsap.from(self.lines, {
+						duration: 2,
+						yPercent: 100,
+						opacity: 0,
+						stagger: 0.05,
+						ease: 'expo.out',
+						delay
+					});
+					return split;
+				}
+			});
+
+			gsap.to('.img', {
+				autoAlpha: 1,
+				scale: 1,
+				ease: 'expo.out',
+				duration: 2,
+				delay
+			});
+		}, container);
+
+		return () => {
+			ctx.revert();
+		};
+	});
 </script>
 
 <MetaTags
@@ -59,14 +106,14 @@
 />
 
 {#if $collection.data}
-	<main class="pt-[var(--section-padding)]">
+	<main class="pt-[var(--section-padding)]" bind:this={container}>
 		<div
 			class="mb-6 flex flex-col gap-4 px-[var(--container-padding)] sm:items-center sm:text-center md:mb-12 md:gap-5"
 		>
-			<h3 class="font-ivy max-w-[15ch] text-2xl leading-[1.35cap]">
+			<h3 class="font-ivy s1 max-w-[15ch] text-2xl leading-[1.35cap] opacity-0">
 				{$collection.data.name}
 			</h3>
-			<p class="max-w-[45ch] text-base leading-tight md:text-lg">
+			<p class="s2 max-w-[45ch] text-base leading-tight opacity-0 md:text-lg">
 				{$collection.data.description}
 			</p>
 		</div>
@@ -75,7 +122,7 @@
 				<img
 					src={urlFor($collection.data.image).maxWidth(1920).format('webp').url()}
 					alt={$collection.data.name}
-					class="absolute left-0 top-0 size-full object-cover"
+					class="img absolute left-0 top-0 size-full scale-125 object-cover opacity-0"
 					fetchpriority="high"
 					srcset={[
 						`${urlFor($collection.data.image).width(320).format('webp').url()} 320w`,
@@ -96,7 +143,7 @@
 		</div>
 		<div class="mb-5 mt-8 flex items-center justify-between px-[var(--container-padding)] md:mt-14">
 			<p class="text-sm font-medium">({$products.data ? $products.data.length : 0})</p>
-			<button class="text-sm font-medium underline"> FILTER OPTIONS </button>
+			<!-- <button class="text-sm font-medium underline"> FILTER OPTIONS </button> -->
 		</div>
 		<div
 			class="relative mb-[var(--section-padding)] grid grid-cols-1 gap-x-8 gap-y-8 px-[var(--container-padding)] sm:grid-cols-2 lg:grid-cols-3 lg:gap-y-12 xl:grid-cols-4"

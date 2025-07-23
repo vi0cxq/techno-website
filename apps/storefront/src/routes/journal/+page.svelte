@@ -6,6 +6,55 @@
 	import { MetaTags } from 'svelte-meta-tags';
 	import { PUBLIC_SITE_URL } from '$env/static/public';
 
+	import { gsap } from 'gsap';
+	import { SplitText } from 'gsap/SplitText';
+
+	import { getIsTransition } from '$lib/stores/transition.svelte';
+
+	let container: HTMLElement;
+
+	const delay = getIsTransition() === 'first' ? 0.2 : 1.4;
+
+	$effect(() => {
+		const ctx = gsap.context(() => {
+			console.log('RUN JOURNAL');
+
+			gsap.set(['.s1'], { autoAlpha: 1 });
+			let split: GSAPTween;
+
+			SplitText.create(['.s1'], {
+				type: 'words,lines',
+				linesClass: 'line',
+				autoSplit: true,
+				mask: 'lines',
+				onSplit: (self) => {
+					split = gsap.from(self.lines, {
+						duration: 2,
+						yPercent: 100,
+						opacity: 0,
+						stagger: 0,
+						ease: 'expo.out',
+						delay
+					});
+					return split;
+				}
+			});
+
+			gsap.to('.article', {
+				autoAlpha: 1,
+				y: 0,
+				ease: 'power1.out',
+				duration: 0.8,
+				stagger: 0.03,
+				delay
+			});
+		}, container);
+
+		return () => {
+			ctx.revert();
+		};
+	});
+
 	let { data }: { data: PageData } = $props();
 
 	const query = $derived.by(() => {
@@ -35,16 +84,18 @@
 	}}
 />
 
-<main class="px-[var(--container-padding)] py-[var(--section-padding)]">
+<main class="px-[var(--container-padding)] py-[var(--section-padding)]" bind:this={container}>
 	<div class="border-foreground/30 border-b pb-4">
-		<h3 class="w-full max-w-[15ch] text-2xl font-medium uppercase leading-[1.35cap] sm:-ml-1">
+		<h3
+			class="s1 w-full max-w-[15ch] text-2xl font-medium uppercase leading-[1.35cap] opacity-0 sm:-ml-1"
+		>
 			journal
 			<span class="font-ivy text-lg">({$query.data.length})</span>
 		</h3>
 	</div>
 	<div class="grid grid-cols-1 items-start gap-6 pt-6 sm:grid-cols-2 md:grid-cols-3 md:gap-8">
 		{#each $query.data as post (post._id)}
-			<article>
+			<article class="article relative translate-y-28 opacity-0">
 				<a href={`/journal/${post.slug.current}`}>
 					<div class="bg-muted relative aspect-[8/5] w-full overflow-hidden">
 						<img

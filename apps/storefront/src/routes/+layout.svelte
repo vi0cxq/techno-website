@@ -6,26 +6,29 @@
 
 	import { gsap } from 'gsap';
 	import { ScrollTrigger } from 'gsap/ScrollTrigger';
+	import { SplitText } from 'gsap/SplitText';
 
-	import { CustomEase } from 'gsap/CustomEase';
 	import Lenis from 'lenis';
 
 	import Footer from '$lib/components/footer.svelte';
 	import Navigation from '$lib/components/navigation.svelte';
 
 	import '../app.css';
+	import { updateIsTransition } from '$lib/stores/transition.svelte';
 
 	let { children, data }: { children: Snippet; data: { url: string } } = $props();
 
 	let lenis: Lenis;
 
 	if (browser) {
-		gsap.registerPlugin(ScrollTrigger, CustomEase);
+		gsap.registerPlugin(ScrollTrigger, SplitText);
 		lenis = new Lenis();
 		setContext<Lenis>('lenis', lenis);
 	}
 
 	onMount(() => {
+		updateIsTransition('start');
+
 		lenis.on('scroll', ScrollTrigger.update);
 
 		gsap.ticker.add((time) => {
@@ -95,7 +98,16 @@
 	{#key data.url}
 		<Navigation />
 
-		<div class="transition-wrapper" in:slideIn={{ duration: 2 }}>
+		<div
+			class="transition-wrapper"
+			in:slideIn={{ duration: 2 }}
+			onintrostart={() => {
+				updateIsTransition('start');
+			}}
+			onintroend={() => {
+				updateIsTransition('end');
+			}}
+		>
 			<p class="text-foreground-2 text-base uppercase">
 				Techno <span>Ceram</span>
 			</p>

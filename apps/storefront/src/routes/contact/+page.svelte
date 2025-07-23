@@ -1,6 +1,56 @@
 <script lang="ts">
 	import { PUBLIC_SITE_URL } from '$env/static/public';
 	import { MetaTags } from 'svelte-meta-tags';
+
+	import { gsap } from 'gsap';
+	import { SplitText } from 'gsap/SplitText';
+
+	import { getIsTransition } from '$lib/stores/transition.svelte';
+	import { onMount } from 'svelte';
+
+	let container: HTMLElement;
+
+	const delay = getIsTransition() === 'first' ? 0.2 : 1.4;
+
+	onMount(() => {
+		const ctx = gsap.context(() => {
+			console.log('RUN JOURNAL');
+
+			gsap.set(['.s1', '.s2'], { autoAlpha: 1 });
+			let split: GSAPTween;
+
+			SplitText.create(['.s1', '.s2'], {
+				type: 'words,lines',
+				linesClass: 'line',
+				autoSplit: true,
+				mask: 'lines',
+				onSplit: (self) => {
+					split = gsap.from(self.lines, {
+						duration: 2,
+						yPercent: 100,
+						opacity: 0,
+						stagger: 0,
+						ease: 'expo.out',
+						delay
+					});
+					return split;
+				}
+			});
+
+			gsap.to('.article', {
+				autoAlpha: 1,
+				y: 0,
+				ease: 'power1.out',
+				duration: 0.8,
+				stagger: 0.03,
+				delay
+			});
+		}, container);
+
+		return () => {
+			ctx.revert();
+		};
+	});
 </script>
 
 <MetaTags
@@ -25,16 +75,16 @@
 	}}
 />
 
-<main>
+<main bind:this={container}>
 	<section class="flex min-h-screen flex-col md:flex-row">
 		<div
 			class="border-foreground/30 flex flex-col justify-between gap-4 border-b px-[var(--container-padding)] pb-20 pt-28 md:flex-1 md:border-b-0 md:border-r"
 		>
-			<h3 class="max-w-[10ch] text-5xl leading-[1.35cap]">
+			<h3 class="s1 max-w-[10ch] text-5xl leading-[1.35cap] opacity-0">
 				Get in Touch
 				<span class="font-ivy"> Touch </span>
 			</h3>
-			<p class="max-w-[45ch] text-base uppercase leading-tight md:text-lg">
+			<p class="s2 max-w-[45ch] text-base uppercase leading-tight opacity-0 md:text-lg">
 				Whether you’re planning a project or have a question, we’re here to help.
 			</p>
 		</div>

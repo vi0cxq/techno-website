@@ -2,6 +2,53 @@
 	import { MetaTags } from 'svelte-meta-tags';
 	import { PUBLIC_SITE_URL } from '$env/static/public';
 	import ParallaxImg from '$lib/components/parallax-img.svelte';
+
+	import { gsap } from 'gsap';
+	import { SplitText } from 'gsap/SplitText';
+	import { onMount } from 'svelte';
+
+	import { getIsTransition } from '$lib/stores/transition.svelte';
+
+	let container: HTMLElement;
+
+	const delay = getIsTransition() === 'first' ? 0.2 : 1.4;
+
+	onMount(() => {
+		const ctx = gsap.context(() => {
+			gsap.set(['.s1', '.s2', '.s3', '.s4'], { autoAlpha: 1 });
+			let split: GSAPTween;
+
+			SplitText.create(['.s1', '.s2', '.s3', '.s4'], {
+				type: 'words,lines',
+				linesClass: 'line',
+				autoSplit: true,
+				mask: 'lines',
+				onSplit: (self) => {
+					split = gsap.from(self.lines, {
+						duration: 2,
+						yPercent: 100,
+						opacity: 0,
+						stagger: 0.05,
+						ease: 'expo.out',
+						delay
+					});
+					return split;
+				}
+			});
+
+			gsap.to('.founder-img', {
+				autoAlpha: 1,
+				scale: 1,
+				ease: 'expo.out',
+				duration: 2,
+				delay
+			});
+		}, container);
+
+		return () => {
+			ctx.revert();
+		};
+	});
 </script>
 
 <MetaTags
@@ -27,10 +74,8 @@
 />
 
 <main class="pt-[calc(var(--section-padding)*1.5)] lg:pt-[calc(var(--section-padding)*2)]">
-	<section class="px-[var(--container-padding)]">
-		<p
-			class="mx-auto text-xl leading-[1.5cap] md:indent-52 xl:indent-96 xl:text-[clamp(2rem,1.6rem+2vw,3rem)]"
-		>
+	<section class="px-[var(--container-padding)]" bind:this={container}>
+		<p class="s1 text-xl leading-[1.5cap] opacity-0 xl:text-[clamp(2rem,1.6rem+2vw,3rem)]">
 			TECHNO CERAM is a ceramic tile manufacturer whose bold approach, technical precision, and
 			design-driven vision redefine the possibilities of modern surfaces across scale, space, and
 			style.
@@ -39,11 +84,11 @@
 			class="flex flex-col gap-3 py-[var(--section-padding)] sm:flex-row sm:gap-8 lg:py-[calc(var(--section-padding)*1.5)]"
 		>
 			<div class="min-w-44 xl:min-w-96">
-				<p class="font-medium uppercase">company</p>
+				<p class="s2 font-medium uppercase opacity-0">company</p>
 			</div>
 			<div class="flex-1">
 				<p class="max-w-[55ch] space-y-8 text-base leading-normal">
-					<span class="block">
+					<span class="s3 block opacity-0">
 						Established in 2017, TECHNO CERAM emerged as the second entity of a growing group
 						committed to redefining ceramic craftsmanship in Algeria. Located in the Dhra Ben Sabah
 						Industrial Zone in Tazoult, Batna, the 92,967 m² site is equipped with two cutting-edge
@@ -51,7 +96,7 @@
 						tiles. From the beginning, the goal was clear: to merge industrial strength with design
 						intelligence.
 					</span>
-					<span class="block">
+					<span class="s4 block opacity-0">
 						Since July 2022, TECHNO CERAM has operated at a capacity of 6.6 million m²
 						annually—delivering surfaces that blend timeless appeal with contemporary direction.
 						From classic styles to avant-garde finishes, each tile reflects a philosophy of control,
@@ -61,11 +106,11 @@
 				</p>
 			</div>
 			<div class="hidden flex-[0.5] md:block xl:flex-1">
-				<div class="relative aspect-[5/6] size-full">
+				<div class="relative aspect-[5/6] size-full overflow-hidden">
 					<enhanced:img
 						src="/static/images/founder.webp?w=1400"
 						alt="techno ceram"
-						class="absolute size-full object-cover object-top"
+						class="founder-img invisible absolute size-full scale-125 object-cover object-top opacity-0"
 						fetchpriority="high"
 						sizes="(max-width: 1024px) 1400px"
 					/>
