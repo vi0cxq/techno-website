@@ -95,7 +95,7 @@
 	</div>
 	<div class="grid grid-cols-1 items-start gap-6 pt-6 sm:grid-cols-2 md:grid-cols-3 md:gap-8">
 		{#each $query.data as post (post._id)}
-			<article class="article relative translate-y-28 opacity-0">
+			<article class="article relative translate-y-14 opacity-0">
 				<a href={`/journal/${post.slug.current}`}>
 					<div class="bg-muted relative aspect-[8/5] w-full overflow-hidden">
 						<img

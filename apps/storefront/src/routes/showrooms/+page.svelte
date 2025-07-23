@@ -94,7 +94,7 @@
 		class="grid grid-cols-1 items-start gap-6 pt-6 sm:grid-cols-2 md:grid-cols-3 md:gap-8 lg:grid-cols-4"
 	>
 		{#each $query.data as showroom, i (showroom._id)}
-			<article class="article relative translate-y-28 opacity-0">
+			<article class="article relative translate-y-14 opacity-0">
 				<a target="_blank" href={`${showroom.location}`}>
 					<p class="mb-1 font-medium">
 						({i})
