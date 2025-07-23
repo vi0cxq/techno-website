@@ -57,7 +57,7 @@ export async function GET({ locals }) {
 			?.join('\n') ?? '';
 
 	const productQuery = groq`*[_type == "product"]{
-        slug
+        slug,
         "lastModified": _updatedAt
     }`;
 
