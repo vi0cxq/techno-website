@@ -94,34 +94,36 @@
 	}
 </script>
 
-<QueryClientProvider client={queryClient}>
-	{#key data.url}
-		<Navigation />
+<svelte:boundary>
+	<QueryClientProvider client={queryClient}>
+		{#key data.url}
+			<Navigation />
 
-		<div
-			class="transition-wrapper"
-			in:slideIn={{ duration: 2 }}
-			onintrostart={() => {
-				updateIsTransition('start');
-			}}
-			onintroend={() => {
-				updateIsTransition('end');
-			}}
-		>
-			<p class="text-foreground-2 text-base uppercase">
-				Techno <span>Ceram</span>
-			</p>
-		</div>
+			<div
+				class="transition-wrapper"
+				in:slideIn={{ duration: 2 }}
+				onintrostart={() => {
+					updateIsTransition('start');
+				}}
+				onintroend={() => {
+					updateIsTransition('end');
+				}}
+			>
+				<p class="text-foreground-2 text-base uppercase">
+					Techno <span>Ceram</span>
+				</p>
+			</div>
 
-		<div
-			class="bg-background relative z-10 mb-[100vh] flex min-h-screen flex-col"
-			out:fade={{ duration: 800 }}
-		>
-			{@render children()}
-		</div>
-	{/key}
-	<Footer />
-</QueryClientProvider>
+			<div
+				class="bg-background relative z-10 mb-[100vh] flex min-h-screen flex-col"
+				out:fade={{ duration: 800 }}
+			>
+				{@render children()}
+			</div>
+		{/key}
+		<Footer />
+	</QueryClientProvider>
+</svelte:boundary>
 
 <style>
 	.transition-wrapper {
