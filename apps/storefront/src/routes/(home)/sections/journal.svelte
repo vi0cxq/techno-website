@@ -45,7 +45,7 @@
 					<a href={`/journal/${post.slug.current}`}>
 						<div class="relative aspect-[5/3] flex-1 overflow-hidden">
 							<img
-								src={urlFor(post.mainImage).width(1280).format('webp').url()}
+								src={urlFor(post.mainImage).width(950).format('webp').url()}
 								alt=""
 								class="absolute left-0 top-0 size-full scale-105 object-cover duration-[0.4s] ease-[cubic-bezier(.16,1,.3,1)] will-change-transform hover:scale-100"
 								fetchpriority="high"
@@ -53,11 +53,9 @@
 									`${urlFor(post.mainImage).width(320).url()} 320w`,
 									`${urlFor(post.mainImage).width(640).url()} 640w`,
 									`${urlFor(post.mainImage).width(768).url()} 768w`,
-									`${urlFor(post.mainImage).width(900).url()} 900w`,
-									`${urlFor(post.mainImage).width(1024).url()} 1024w`,
-									`${urlFor(post.mainImage).width(1280).url()} 1280w`
+									`${urlFor(post.mainImage).width(950).url()} 950w`
 								].join(', ')}
-								sizes="(max-width: 640px) 320px, (max-width: 768px) 640px, (max-width: 1024px) 768px, (max-width: 1280px) 1024px, 950px"
+								sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 950px"
 							/>
 						</div>
 						<p class="mt-1 font-normal">{post.title}</p>
