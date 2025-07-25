@@ -196,10 +196,10 @@
 		style="position: absolute; width: 100vw; height: 100%; object-fit: cover; top: 0; left: 0;"
 		fetchpriority="high"
 		sizes="min(2024px, 100vw)"
-		class="header-bg invisible opacity-0"
+		class="header-bg opacity-0"
 	/>
 	<!-- <div class="bg-foreground/20 absolute left-0 top-0 size-full"></div> -->
-	<h1 class="text-background s1 z-10 w-[15ch] text-5xl leading-[1.5cap] opacity-0">
+	<h1 class="text-background s1 z-10 w-[15ch] text-5xl leading-[1.56cap] opacity-0">
 		Defining <span class="font-ivy">Spaces</span> with
 		<span class="font-ivy"> Timeless </span>
 		Elegance
