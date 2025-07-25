@@ -185,7 +185,7 @@
 				/>
 			</div>
 			<div class="flex items-center overflow-hidden">
-				<p class="p2 ml-0.5 text-base font-medium opacity-0 md:text-xl">TECHNO</p>
+				<p class="p2 ml-0.5 text-base font-medium opacity-0 md:text-xl">CERAM</p>
 			</div>
 		</div>
 	</div>
