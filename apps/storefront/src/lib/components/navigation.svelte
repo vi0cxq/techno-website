@@ -32,9 +32,11 @@
 	import outdoorImg from '$lib/assets/images/collections/outdoor.webp?enhanced';
 	import kitchenImg from '$lib/assets/images/collections/kitchen.webp?enhanced';
 	import { beforeNavigate } from '$app/navigation';
-	import { getNavigationStore } from '$lib/stores/transition.svelte';
+	import { getTransitionStore } from '$lib/stores/transition.svelte';
 
-	const navigation = getNavigationStore();
+	const transition = getTransitionStore();
+
+	let menu = $state(false);
 
 	let navigation_data = [
 		{
@@ -165,10 +167,12 @@
 			toggle() {
 				if (animation?.reversed()) {
 					animation?.play();
+					menu = true;
 					lenis.stop();
 				} else {
 					animation?.reverse();
 					lenis.start();
+					menu = false;
 				}
 			},
 			reverse() {
@@ -181,13 +185,12 @@
 		return {
 			to(): Attachment {
 				return (element) => {
-					gsap
-						.to(element, {
-							autoAlpha: 1,
-							duration: 0.6,
-							y: 0
-						})
-						.paused(!navigation.loader.current);
+					gsap.to(element, {
+						autoAlpha: 1,
+						duration: 0.6,
+						y: 0,
+						delay: page.url.pathname === '/' ? (transition.delay.current ? 0.2 : 4) : 0
+					});
 
 					const showNav = gsap
 						.from(element, {
@@ -323,7 +326,7 @@
 			menuAnimation.toggle();
 		}}
 	>
-		Menu
+		{menu ? 'Close' : 'Menu'}
 	</button>
 </nav>
 
@@ -442,6 +445,6 @@
 		scrolled = e.currentTarget.scrollY > 50;
 	}}
 	onbeforeunload={() => {
-		navigation.removeDelay();
+		transition.removeDelay();
 	}}
 />

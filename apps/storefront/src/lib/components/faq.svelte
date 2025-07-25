@@ -28,10 +28,10 @@
 		<div class="hidden flex-1 md:block">
 			<div class="relative aspect-square">
 				<enhanced:img
-					src="/static/images/ceram.webp?w=1024;900;768;640;320"
+					src="/static/images/faq.webp?w=1800;1024;900;768;640;320"
 					alt=""
 					class="absolute left-0 top-0 size-full object-cover"
-					sizes="(max-width: 640px) 320px, (max-width: 768px) 640px, (max-width: 1024px) 768px, (max-width: 1280px) 1024px, 950px"
+					sizes="(max-width: 640px) 320px, (max-width: 768px) 640px, (max-width: 1024px) 768px, (max-width: 1280px) 1800px, 950px"
 				/>
 			</div>
 		</div>

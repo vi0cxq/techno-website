@@ -7,13 +7,13 @@
 	import { SplitText } from 'gsap/SplitText';
 	import { onMount } from 'svelte';
 
-	import { getNavigationStore } from '$lib/stores/transition.svelte';
+	import { getTransitionStore } from '$lib/stores/transition.svelte';
 
 	let container: HTMLElement;
 
-	let navigation = getNavigationStore();
+	let transition = getTransitionStore();
 
-	const delay = navigation.delay.current ? 1.4 : 0.2;
+	const delay = transition.delay.current ? 1.4 : 0.2;
 
 	onMount(() => {
 		const ctx = gsap.context(() => {

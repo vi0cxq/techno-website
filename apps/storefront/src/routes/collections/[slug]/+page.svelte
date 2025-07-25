@@ -14,6 +14,7 @@
 	import { gsap } from 'gsap';
 	import { SplitText } from 'gsap/SplitText';
 	import { onMount } from 'svelte';
+	import { getTransitionStore } from '$lib/stores/transition.svelte';
 
 	let { data }: { data: PageData } = $props();
 
@@ -38,11 +39,11 @@
 		? $collection.data.description
 		: 'Explore our diverse ceramic tile collections, from classic to avant-garde styles, crafted for modern living.';
 
-	import { getIsTransition } from '$lib/stores/transition.svelte';
-
 	let container = $state<HTMLElement>();
 
-	const delay = getIsTransition() === 'first' ? 0.2 : 1.4;
+	let transition = getTransitionStore();
+
+	const delay = transition.delay.current ? 1.4 : 0.2;
 
 	onMount(() => {
 		const ctx = gsap.context(() => {

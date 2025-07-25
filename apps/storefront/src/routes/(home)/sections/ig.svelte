@@ -9,7 +9,7 @@
 		<div class="hidden flex-1 items-start justify-center md:flex">
 			<ParallaxImg classname="relative aspect-[4/5] w-2/3 ">
 				<enhanced:img
-					src="/static/images/building_big.webp?w=560"
+					src="/static/images/ig-left.webp?w=560"
 					class="absolute left-0 top-[-5%] h-full w-full object-cover will-change-transform"
 					sizes="(min-width:1440px) 560px, (min-width:768px) 560px, 50vw"
 					alt="techno ceram"
@@ -25,9 +25,9 @@
 
 			<ParallaxImg classname="relative aspect-square w-full overflow-hidden" targetId="parallax">
 				<enhanced:img
-					src="/static/images/building_big.webp?w=1120;560"
+					src="/static/images/ig-mid.webp?w=1840;1920;1120;560"
 					class="absolute left-0 top-[-5%] h-[115%] w-full object-cover will-change-transform"
-					sizes="(min-width:1920px) 920px, (min-width:768px) 560px, 50vw"
+					sizes="(min-width:1920px) 1840px, (min-width:768px) 560px, 50vw"
 					alt="techno ceram"
 				/>
 			</ParallaxImg>
@@ -44,7 +44,7 @@
 		<div class="hidden flex-1 items-end justify-center md:flex">
 			<ParallaxImg classname="relative aspect-[6/4] w-2/3">
 				<enhanced:img
-					src="/static/images/building_big.webp?w=560"
+					src="/static/images/ig-right.webp?w=560"
 					class="absolute left-0 top-[-5%] h-full w-full object-cover will-change-transform"
 					sizes="(min-width:1440px) 560px, (min-width:768px) 560px, 50vw"
 					alt="techno ceram"

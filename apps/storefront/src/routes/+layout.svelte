@@ -15,13 +15,13 @@
 	import Navigation from '$lib/components/navigation.svelte';
 
 	import '../app.css';
-	import { getNavigationStore } from '$lib/stores/transition.svelte';
+	import { getTransitionStore } from '$lib/stores/transition.svelte';
 
 	let { children, data }: { children: Snippet; data: { url: string } } = $props();
 
 	let lenis: Lenis;
 
-	const navigation = getNavigationStore();
+	const transition = getTransitionStore();
 
 	if (browser) {
 		gsap.registerPlugin(ScrollTrigger, SplitText, GSDevTools);
@@ -30,7 +30,7 @@
 	}
 
 	onMount(() => {
-		navigation.addDelay();
+		transition.addDelay();
 
 		lenis.on('scroll', ScrollTrigger.update);
 
@@ -47,6 +47,7 @@
 
 		observer.observe(document.body);
 
+		lenis.scrollTo(0, { immediate: true });
 		return () => {
 			observer.disconnect();
 		};

@@ -31,7 +31,7 @@
 				targetId="parallax"
 			>
 				<enhanced:img
-					src="/static/images/building_big.webp?w=1120;560"
+					src="/static/images/about-1.webp?w=1120;560"
 					class="absolute left-0 top-[-5%] h-[115%] w-full object-cover will-change-transform"
 					sizes="(min-width:1920px) 1120px, (min-width:768px) 560px, 50vw"
 					alt="techno ceram"
@@ -45,7 +45,7 @@
 				targetId="parallax-2"
 			>
 				<enhanced:img
-					src="/static/images/building_small.webp?w=448;224"
+					src="/static/images/about-2.webp?w=448;224"
 					class="absolute left-0 top-[-5%] h-[115%] w-full object-cover will-change-transform"
 					sizes="(min-width:1920px) 448px, (min-width:768px) 224px, 50vw"
 					alt="techno ceram"

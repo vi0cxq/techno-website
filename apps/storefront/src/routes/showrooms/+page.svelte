@@ -8,7 +8,7 @@
 	import { onMount } from 'svelte';
 	import { gsap } from 'gsap';
 	import { SplitText } from 'gsap/SplitText';
-	import { getNavigationStore } from '$lib/stores/transition.svelte';
+	import { getTransitionStore } from '$lib/stores/transition.svelte';
 
 	let { data }: { data: PageData } = $props();
 
@@ -18,9 +18,9 @@
 
 	let container: HTMLElement;
 
-	let navigation = getNavigationStore();
+	let transition = getTransitionStore();
 
-	const delay = navigation.delay.current ? 1.4 : 0.2;
+	const delay = transition.delay.current ? 1.4 : 0.2;
 
 	onMount(() => {
 		const ctx = gsap.context(() => {

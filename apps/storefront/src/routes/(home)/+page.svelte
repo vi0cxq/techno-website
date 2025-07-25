@@ -12,11 +12,11 @@
 	import { getContext, onMount } from 'svelte';
 	import { gsap } from 'gsap';
 	import { SplitText } from 'gsap/SplitText';
-	import {
-		getIsTransition,
-		getNavigationStore,
-		updateIsPreloading
-	} from '$lib/stores/transition.svelte';
+	import { getTransitionStore } from '$lib/stores/transition.svelte';
+
+	import { MediaQuery } from 'svelte/reactivity';
+
+	const sm = new MediaQuery('max-width: 500px');
 
 	import type Lenis from 'lenis';
 
@@ -24,11 +24,11 @@
 
 	let preloader: HTMLElement;
 
-	const delay = getIsTransition() === 'first' ? 0.2 : 1.4;
+	let transition = getTransitionStore();
+
+	const delay = transition.delay.current ? 1.4 : 0.2;
 
 	let lenis = getContext<Lenis>('lenis');
-
-	const navigation = getNavigationStore();
 
 	const animateTitle = () => {
 		let split: GSAPTween;
@@ -57,37 +57,56 @@
 
 	onMount(() => {
 		const ctx = gsap.context(() => {
-			if (navigation.loader.current) {
+			if (transition.loader.current) {
+				window.scrollTo(0, 0);
+
 				lenis.stop();
 
 				const tl = gsap.timeline();
 
 				gsap.set(preloader, { autoAlpha: 1 });
 				gsap.set('.image-wrapper', { autoAlpha: 1 });
+				gsap.set(['.p1', '.p2'], { autoAlpha: 1 });
 
-				tl.to('.image-wrapper', {
-					width: 320,
-					ease: 'power2.inOut',
-					duration: 0.8,
-					delay: 0.2
-				}).to('.image-wrapper', {
-					width: '100vw',
-					height: '100vh',
-					duration: 0.8,
-					ease: 'power2.inOut',
-					delay: 0.6,
-					onComplete: () => {
-						gsap.set(preloader, { visibility: 'hidden', display: 'none' });
+				tl.from(['.p1', '.p2'], {
+					duration: 1.8,
+					yPercent: 100,
+					opacity: 0,
+					ease: 'expo.out'
+				})
+					.to(
+						'.image-wrapper',
+						{
+							width: sm.current ? 200 : 320,
+							ease: 'power4.inOut',
+							duration: 0.8
+						},
+						'-=0.7'
+					)
+					.to('.image-4', {
+						opacity: 0
+					})
+					.to('.image-3', {
+						opacity: 0
+					})
+					.to('.image-2', {
+						opacity: 0
+					})
+					.to('.image-wrapper', {
+						width: '100vw',
+						height: '100vh',
+						duration: 0.8,
+						ease: 'power2.inOut',
+						onComplete: () => {
+							gsap.set(preloader, { visibility: 'hidden', display: 'none' });
 
-						animateTitle();
+							animateTitle();
 
-						updateIsPreloading(false);
+							lenis.start();
 
-						lenis.start();
-
-						navigation.hideLoader();
-					}
-				});
+							transition.hideLoader();
+						}
+					});
 			} else {
 				animateTitle();
 			}
@@ -131,29 +150,52 @@
 	>
 		<div class="flex items-center">
 			<div class="flex items-center overflow-hidden">
-				<p class="mr-0.5 text-base font-medium md:text-xl">TECHNO</p>
+				<p class="p1 mr-0.5 text-base font-medium opacity-0 md:text-xl">TECHNO</p>
 			</div>
 			<div class="image-wrapper">
 				<enhanced:img
-					src="/static/images/ceram.webp?w=1920;1600;1200;800;400"
+					src="/static/images/hero.webp?w=1920;1600;1200;800;400"
 					alt="techno ceram"
 					sizes="min(1920px, 100vw)"
-					class="image"
+					class="image image-1"
+					fetchpriority="high"
+				/>
+
+				<enhanced:img
+					src="/static/images/preloader-2.webp?w=1200;800;400"
+					alt="techno ceram"
+					sizes="min(1920px, 100vw)"
+					class="image image-2"
+					fetchpriority="high"
+				/>
+				<enhanced:img
+					src="/static/images/preloader-3.webp?w=1200;800;400"
+					alt="techno ceram"
+					sizes="min(1920px, 100vw)"
+					class="image image-3"
+					fetchpriority="high"
+				/>
+
+				<enhanced:img
+					src="/static/images/preloader-4.webp?w=1200;800;400"
+					alt="techno ceram"
+					sizes="min(1920px, 100vw)"
+					class="image image-4"
 					fetchpriority="high"
 				/>
 			</div>
 			<div class="flex items-center overflow-hidden">
-				<p class="ml-0.5 text-base font-medium md:text-xl">TECHNO</p>
+				<p class="p2 ml-0.5 text-base font-medium opacity-0 md:text-xl">TECHNO</p>
 			</div>
 		</div>
 	</div>
 
 	<enhanced:img
-		src="/static/images/ceram.webp?w=1920;1600;1200;"
+		src="/static/images/hero.webp?w=2024;1920;1600;1200"
 		alt="techno ceram"
 		style="position: absolute; width: 100vw; height: 100%; object-fit: cover; top: 0; left: 0;"
 		fetchpriority="high"
-		sizes="min(1920px, 100vw)"
+		sizes="min(2024px, 100vw)"
 		class="header-bg invisible opacity-0"
 	/>
 	<!-- <div class="bg-foreground/20 absolute left-0 top-0 size-full"></div> -->
@@ -171,7 +213,7 @@
 
 <svelte:window
 	onbeforeunload={() => {
-		navigation.showLoader();
+		transition.showLoader();
 	}}
 />
 
@@ -193,5 +235,11 @@
 		object-fit: cover;
 		will-change: transform, width, height;
 		display: inline-block;
+	}
+
+	@media (max-width: 500px) {
+		.image-wrapper {
+			height: 120px;
+		}
 	}
 </style>
