@@ -6,6 +6,7 @@
 
 	import { gsap } from 'gsap';
 	import { ScrollTrigger } from 'gsap/ScrollTrigger';
+	import { GSDevTools } from 'gsap/GSDevTools';
 	import { SplitText } from 'gsap/SplitText';
 
 	import Lenis from 'lenis';
@@ -14,20 +15,22 @@
 	import Navigation from '$lib/components/navigation.svelte';
 
 	import '../app.css';
-	import { updateIsTransition } from '$lib/stores/transition.svelte';
+	import { getNavigationStore } from '$lib/stores/transition.svelte';
 
 	let { children, data }: { children: Snippet; data: { url: string } } = $props();
 
 	let lenis: Lenis;
 
+	const navigation = getNavigationStore();
+
 	if (browser) {
-		gsap.registerPlugin(ScrollTrigger, SplitText);
+		gsap.registerPlugin(ScrollTrigger, SplitText, GSDevTools);
 		lenis = new Lenis();
 		setContext<Lenis>('lenis', lenis);
 	}
 
 	onMount(() => {
-		updateIsTransition('start');
+		navigation.addDelay();
 
 		lenis.on('scroll', ScrollTrigger.update);
 
@@ -99,16 +102,7 @@
 		{#key data.url}
 			<Navigation />
 
-			<div
-				class="transition-wrapper"
-				in:slideIn={{ duration: 2 }}
-				onintrostart={() => {
-					updateIsTransition('start');
-				}}
-				onintroend={() => {
-					updateIsTransition('end');
-				}}
-			>
+			<div class="transition-wrapper" in:slideIn={{ duration: 2 }}>
 				<p class="text-foreground-2 text-base uppercase">
 					Techno <span>Ceram</span>
 				</p>

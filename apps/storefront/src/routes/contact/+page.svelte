@@ -5,17 +5,17 @@
 	import { gsap } from 'gsap';
 	import { SplitText } from 'gsap/SplitText';
 
-	import { getIsTransition } from '$lib/stores/transition.svelte';
 	import { onMount } from 'svelte';
+	import { getNavigationStore } from '$lib/stores/transition.svelte';
 
 	let container: HTMLElement;
 
-	const delay = getIsTransition() === 'first' ? 0.2 : 1.4;
+	let navigation = getNavigationStore();
+
+	const delay = navigation.delay.current ? 1.4 : 0.2;
 
 	onMount(() => {
 		const ctx = gsap.context(() => {
-			console.log('RUN JOURNAL');
-
 			gsap.set(['.s1', '.s2'], { autoAlpha: 1 });
 			let split: GSAPTween;
 
@@ -35,15 +35,6 @@
 					});
 					return split;
 				}
-			});
-
-			gsap.to('.article', {
-				autoAlpha: 1,
-				y: 0,
-				ease: 'power1.out',
-				duration: 0.8,
-				stagger: 0.03,
-				delay
 			});
 		}, container);
 

@@ -101,7 +101,7 @@
 												`${urlFor(product.image).width(768).format('webp').url()} 768w`,
 												`${urlFor(product.image).width(900).format('webp').url()} 900w`
 											].join(', ')}
-											sizes="(max-width: 640px) 320px, (max-width: 768px) 640px, (max-width: 1024px) 768px, 465px"
+											sizes="(max-width: 640px) 50vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 465px"
 										/>
 									</div>
 

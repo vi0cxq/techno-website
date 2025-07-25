@@ -32,6 +32,9 @@
 	import outdoorImg from '$lib/assets/images/collections/outdoor.webp?enhanced';
 	import kitchenImg from '$lib/assets/images/collections/kitchen.webp?enhanced';
 	import { beforeNavigate } from '$app/navigation';
+	import { getNavigationStore } from '$lib/stores/transition.svelte';
+
+	const navigation = getNavigationStore();
 
 	let navigation_data = [
 		{
@@ -178,6 +181,14 @@
 		return {
 			to(): Attachment {
 				return (element) => {
+					gsap
+						.to(element, {
+							autoAlpha: 1,
+							duration: 0.6,
+							y: 0
+						})
+						.paused(!navigation.loader.current);
+
 					const showNav = gsap
 						.from(element, {
 							yPercent: -100,
@@ -210,7 +221,7 @@
 
 <nav
 	class={[
-		'bg-background fixed z-[100] flex h-12 w-full items-center justify-between px-[var(--container-padding)] transition-colors duration-300 lg:h-11',
+		'bg-background fixed z-[100] flex h-12 w-full -translate-y-14 items-center justify-between px-[var(--container-padding)] opacity-0 transition-colors duration-300 lg:h-11',
 		isProductPage && !scrolled && 'bg-transparent'
 	]}
 	{@attach navAnimation.to()}
@@ -429,5 +440,8 @@
 	}}
 	onscroll={(e) => {
 		scrolled = e.currentTarget.scrollY > 50;
+	}}
+	onbeforeunload={() => {
+		navigation.removeDelay();
 	}}
 />
